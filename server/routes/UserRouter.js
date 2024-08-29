@@ -43,6 +43,30 @@ router.post("/register", async (req, res) => {
         res.status(500).json({error: "Registration Failed"})
     }
 })
+router.post("/login", async (req, res) => {
+    const {email, password} = req.body
+    try {
+        const user = await User.findOne({where: {email: email}})
+        if (!user) {
+            return res.status(404).json({error: "User Not Found"})
+        }
+        const match = await bcrypt.compare(password, user.password)
+        if (!match) {
+            return res.status(401).json({error: "Incorrect email or password"})
+        }
+        const accessToken = sign({
+            email: user.email, 
+            id: user.id,
+        }, "supersecretkey")
+        res.json({
+            accessToken: accessToken,
+            email: user.email,
+            id: user.id
+        })
+    } catch (error) {
+        res.status(500).json({error: "An error occured trying to login"})
+    }
+})
 
 
 module.exports = router
