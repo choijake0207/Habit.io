@@ -1,14 +1,15 @@
 import React, { useContext } from 'react'
-import { Outlet, NavLink } from 'react-router-dom'
+import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../Context/AuthContext'
 import "./layout.css"
 
 export default function PublicRootLayout() {
     const {authorizedUser} = useContext(AuthContext)
+    const navigate = useNavigate()
   return (
     <div className="public-root-layout">
         <nav className="public-nav">
-            <p>Habit.io</p>
+            <p onClick={(e) =>navigate("/") }>Habit.io</p>
             {authorizedUser.authStatus ? 
               <div className="public-nav-a authorized-nav-a">
                 <NavLink to="/dashboard">Go To Dashboard</NavLink>
