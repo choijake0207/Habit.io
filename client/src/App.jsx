@@ -7,23 +7,25 @@ import Register from './Pages/Register/Register'
 import { AuthProvider } from './Context/AuthContext'
 import { AuthContext } from './Context/AuthContext'
 import "./App.css"
+import PublicRootLayout from './Layouts/PublicRootLayout'
+import Dashboard from './Pages/Dashboard/Dashboard'
 
 const PrivateRoutes = ({element}) => {
   const {authorizedUser} = useContext(AuthContext)
-  return authorizedUser.status ? element : <Navigate to="/login"/>
+  return authorizedUser.authStatus ? element : <Navigate to="/login"/>
 }
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/">
+      <Route path="/" element={<PublicRootLayout/>}>
         <Route index element={<LandingPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/register" element={<Register/>}/>
       </Route>
 
       <Route element={<PrivateRoutes element={<RootLayout/>}/>}>
-        <Route/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Route>
     </>
   )
