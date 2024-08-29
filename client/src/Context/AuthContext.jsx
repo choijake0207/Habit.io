@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { register as registerAPI } from '../API/UserAPI'
+import { register as registerAPI, authorizeUser as authorizeAPI } from '../API/UserAPI'
 
 export const AuthContext = createContext("")
 export const AuthProvider = ({children}) => {
@@ -14,6 +14,18 @@ export const AuthProvider = ({children}) => {
             throw(error)
         }
     }
+    useEffect(() => {
+        const authorizeUser = async () => {
+            try {
+                const response = await authorizeAPI()
+                setAuthorizedUser({email: response.data.email, id: response.data.id, authStatus: true })
+            } catch (error) {
+                setAuthorizedUser({email: "", id: "", authStatus: false})
+                throw(error)
+            }
+        }
+        authorizeUser()
+    }, [])
 
 
     const values = {register, authorizedUser}
