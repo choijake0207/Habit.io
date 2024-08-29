@@ -1,11 +1,14 @@
 import React from 'react'
-import {createBrowserRouter, createRouterFromElements, Route, RouterProvider} from "react-router-dom"
+import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from "react-router-dom"
+import RootLayout from './Layouts/RootLayout'
 import LandingPage from './Pages/LandingPage/LandingPage'
+import LoginPage from './Pages/Login/LoginPage'
+import "./App.css"
 
 const router = createBrowserRouter(
-  createRouterFromElements(
-    <Route path="/" element={LandingPage}>
-
+  createRoutesFromElements(
+    <Route path="/" element={<LandingPage/>}>
+      <Route path="/login" element={<LoginPage/>}/>
     </Route>
   )
 )
