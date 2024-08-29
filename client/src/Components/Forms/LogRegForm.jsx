@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react'
 import { AuthContext } from '../../Context/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function LogReg({type}) {
   const [email, setEmail] = useState("")
@@ -7,6 +8,7 @@ export default function LogReg({type}) {
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const {register, authorizedUser, login} = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -16,6 +18,7 @@ export default function LogReg({type}) {
       setLastName("")
       setEmail("")
       setPassword("")
+      navigate("/dashboard")
     } catch (error) {
       console.log(error)
     }
@@ -26,6 +29,7 @@ export default function LogReg({type}) {
       await login(email, password)
       setEmail("")
       setPassword("")
+      navigate("/dashboard")
     } catch (error) {
       console.log(error)
     }
