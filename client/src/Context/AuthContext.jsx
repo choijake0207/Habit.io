@@ -39,6 +39,11 @@ export const AuthProvider = ({children}) => {
             throw(error)
         }
     }
+    // logout
+    const logout = () => {
+        localStorage.removeItem("accessToken")
+        setAuthorizedUser({email: "", id: "", authStatus: false})
+    }
 
 
     const values = {register, authorizedUser, login}
