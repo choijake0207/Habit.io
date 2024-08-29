@@ -1,0 +1,40 @@
+.landing-page {
+    overflow-y: scroll;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+}
+
+
+/*              Components        Components dont have to be 100vh, reconsider sizing later      */ 
+.landing-quote, .landing-statement, .landing-walk-through, .landing-contact {
+    scroll-snap-stop: always;
+    scroll-snap-align: center;
+    box-sizing: border-box;
+    padding: 100px;
+    border: 1px dashed grey;
+}
+/*                  Quote.jsx              */
+.prim-quote {
+    font-size: 4em;
+    font-weight: 500;
+}
+.hl-green {
+    color: forestgreen;
+    font-weight: 500;
+}
+.hl-red {
+    color: rgb(207, 29, 29);
+    font-weight: 500;
+}
+.em-word {
+    font-weight: 700;
+    border-bottom: 3px solid black;
+}
+/*                  Statement.jsx              */
+.landing-statement {
+    background: linear-gradient(to bottom, white, rgb(187, 187, 187));
+}
+/*                  Walk.jsx              */
+.landing-walk-through {
+    background: linear-gradient(to bottom, rgb(188, 188, 188), rgb(169, 169, 169))
+}
