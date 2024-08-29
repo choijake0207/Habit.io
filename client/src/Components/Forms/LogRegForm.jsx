@@ -6,7 +6,7 @@ export default function LogReg({type}) {
   const [password, setPassword] = useState("")
   const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
-  const {register} = useContext(AuthContext)
+  const {register, authorizedUser, login} = useContext(AuthContext)
 
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -20,16 +20,30 @@ export default function LogReg({type}) {
       console.log(error)
     }
   }
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    try {
+      await login(email, password)
+      setEmail("")
+      setPassword("")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  console.log(authorizedUser)
 
   return (
     <div className="logreg-wrap">
+      {authorizedUser.email}
       {type === "login" ? 
-        <form className="login-form">
+        <form className="login-form" onSubmit={handleLogin}>
+          <label>Email</label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <label>Password</label>
           <input
             type="password"
             value={password}
