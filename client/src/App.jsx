@@ -4,6 +4,7 @@ import RootLayout from './Layouts/RootLayout'
 import LandingPage from './Pages/LandingPage/LandingPage'
 import LoginPage from './Pages/Login/LoginPage'
 import Register from './Pages/Register/Register'
+import { AuthProvider } from './Context/AuthContext'
 import "./App.css"
 
 const router = createBrowserRouter(
@@ -18,6 +19,9 @@ const router = createBrowserRouter(
 
 export default function App() {
   return (
-    <RouterProvider router={router}/>
+    <AuthProvider>
+      <RouterProvider router={router}/>
+    </AuthProvider> 
+    
   )
 }
