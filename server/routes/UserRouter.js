@@ -7,7 +7,7 @@ const {sign} = require("jsonwebtoken")
 
 // register 
 router.post("/register", async (req, res) => {
-    const {email, password} = req.body
+    const {firstName, lastName, email, password} = req.body
     try {
         // check for existing email
         const existingEmail = await User.findOne({where: {email: email}})
@@ -16,6 +16,8 @@ router.post("/register", async (req, res) => {
         }
         const hash = await bcrypt.hash(password,10)
         const newUser = await User.create({
+            firstName: firstName,
+            lastName: lastName,
             email: email,
             password: hash
         })
@@ -30,3 +32,5 @@ router.post("/register", async (req, res) => {
         res.status(500).json({error: "Registration Failed"})
     }
 })
+
+module.exports = router
