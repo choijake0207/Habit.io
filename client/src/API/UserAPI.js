@@ -18,3 +18,11 @@ export const authorizeUser = async () => {
     })
     return response
 }
+
+export const login = async (email, password) => {
+    const response = await axios.post("http://localhost:3001/user/login", {
+        email,
+        password
+    })
+    return response
+}
