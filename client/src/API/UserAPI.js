@@ -9,3 +9,12 @@ export const register = async (firstName, lastName, email, password) => {
     })
     return response
 }
+
+export const authorizeUser = async () => {
+    const response = await axios.get("http://localhost:3001/user/auth", {
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }
+    })
+    return response
+}
