@@ -3,12 +3,15 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 import RootLayout from './Layouts/RootLayout'
 import LandingPage from './Pages/LandingPage/LandingPage'
 import LoginPage from './Pages/Login/LoginPage'
+import Register from './Pages/Register/Register'
 import "./App.css"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<LandingPage/>}>
+    <Route path="/">
+      <Route index element={<LandingPage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/register" element={<Register/>}/>
     </Route>
   )
 )
