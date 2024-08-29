@@ -26,7 +26,9 @@ router.post("/register", async (req, res) => {
             id: newUser.id
         }, "supersecretkey")
         res.json({
-            accessToken: accessToken
+            accessToken: accessToken,
+            email: newUser.email,
+            id: newUser.id
         })
     } catch (error) {
         res.status(500).json({error: "Registration Failed"})
