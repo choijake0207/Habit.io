@@ -1,0 +1,39 @@
+/* PUBLIC ROOT LAYOUT */
+
+.public-root-layout {
+    height: 100vh;
+}
+.public-nav {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    top: 0;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.23);
+    height: 70px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background: white;
+}
+.public-nav p {
+    font-weight: bolder;
+    font-size: 1.5em;
+    margin: 0;
+}
+.public-nav-a {
+    display: flex;
+    gap: 30px;
+}
+.public-nav a {
+    border: none;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.59);
+    transition: .2s ease-in-out;
+}
+.public-nav a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+/* PRIVATE ROOT LAYOUT */
