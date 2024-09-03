@@ -4,6 +4,7 @@ import { register as registerAPI, authorizeUser as authorizeAPI, login as loginA
 export const AuthContext = createContext("")
 export const AuthProvider = ({children}) => {
     const [authorizedUser, setAuthorizedUser] = useState({email: "", id: "", authStatus: false})
+    const [loading, setLoading] = useState(true)
     // register
     const register = async (firstName, lastName, email, password) => {
         try {
@@ -24,6 +25,8 @@ export const AuthProvider = ({children}) => {
             } catch (error) {
                 setAuthorizedUser({email: "", id: "", authStatus: false})
                 throw(error)
+            } finally {
+                setLoading(false)
             }
         }
         authorizeUser()
@@ -46,7 +49,7 @@ export const AuthProvider = ({children}) => {
     }
 
 
-    const values = {register, authorizedUser, login}
+    const values = {register, authorizedUser, login, logout, loading}
     return (
         <AuthContext.Provider value={values}>
             {children}
