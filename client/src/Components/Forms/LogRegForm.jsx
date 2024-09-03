@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import { AuthContext } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import "./Form.css"
 
 export default function LogReg({type}) {
   const [email, setEmail] = useState("")
@@ -18,7 +19,7 @@ export default function LogReg({type}) {
       setLastName("")
       setEmail("")
       setPassword("")
-      navigate("/dashboard")
+      navigate("/home")
     } catch (error) {
       console.log(error)
     }
@@ -29,7 +30,7 @@ export default function LogReg({type}) {
       await login(email, password)
       setEmail("")
       setPassword("")
-      navigate("/dashboard")
+      navigate("/home")
     } catch (error) {
       console.log(error)
     }
@@ -38,9 +39,9 @@ export default function LogReg({type}) {
 
   return (
     <div className="logreg-wrap">
-      {authorizedUser.email}
       {type === "login" ? 
         <form className="login-form" onSubmit={handleLogin}>
+          <h1>Welcome Back</h1>
           <label>Email</label>
           <input
             type="email"
@@ -53,10 +54,12 @@ export default function LogReg({type}) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <label/>
           <button type="submit">Log In</button>
         </form>
         :
         <form className="register-form" onSubmit={handleRegister}>
+          <h1>Get Started Today</h1>
           <label>First Name</label>
           <input
             type="text"
@@ -81,6 +84,7 @@ export default function LogReg({type}) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <label/>
           <button type="submit">Join</button>
         </form>
       }
