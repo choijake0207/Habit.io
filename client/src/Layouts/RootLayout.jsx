@@ -10,9 +10,22 @@ export default function RootLayout() {
     <div className="root-layout">
         <nav className='user-nav'>
           <div className="user-nav-a">
-            <NavLink to="/home"><House/></NavLink>
-            <NavLink to="/insights"><ChartBar/></NavLink>
-            <NavLink to="/profile"><User/></NavLink>
+            <NavLink to="/home">
+              {({isActive}) => (
+                <House weight={isActive ? "fill" : "regular"}/>
+              )}
+              
+            </NavLink>
+            <NavLink to="/insights">
+              {({isActive}) => (
+                <ChartBar weight={isActive ? "fill" : "regular"}/>
+              )}
+            </NavLink>
+            <NavLink to="/profile">
+              {({isActive}) => (
+                <User weight={isActive ? "fill" : "regular"}/>
+              )}
+            </NavLink>
           </div>
           <button 
             className="sign-out-btn"
