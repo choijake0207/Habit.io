@@ -43,6 +43,7 @@ router.post("/register", async (req, res) => {
         res.status(500).json({error: "Registration Failed"})
     }
 })
+// login
 router.post("/login", async (req, res) => {
     const {email, password} = req.body
     try {
@@ -65,6 +66,21 @@ router.post("/login", async (req, res) => {
         })
     } catch (error) {
         res.status(500).json({error: "An error occured trying to login"})
+    }
+})
+// fetch profile info
+router.get("/profile", validateToken, async (req, res) => {
+    try {
+        const user = await User.findOne({
+            where: {email: req.user.email},
+            attributes: ["firstName", "lastName", "email", "id", "createdAt"]
+        })
+        if (!user) {
+            return res.status(404).json({error: "User Does Not Exist"})
+        }
+        res.json(user)
+    } catch (error) {
+        res.status(500).json({error: "An Error Occured Trying To Fetch Profile"})
     }
 })
 
