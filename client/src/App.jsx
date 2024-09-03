@@ -13,7 +13,10 @@ import Insights from './Pages/Insights/Insights'
 import Profile from './Pages/Profile/Profile'
 
 const PrivateRoutes = ({element}) => {
-  const {authorizedUser} = useContext(AuthContext)
+  const {authorizedUser, loading} = useContext(AuthContext)
+  if (loading) {
+    return null
+  }
   return authorizedUser.authStatus ? element : <Navigate to="/login"/>
 }
 
