@@ -26,3 +26,12 @@ export const login = async (email, password) => {
     })
     return response
 }
+
+export const fetchProfile = async () => {
+    const response = await axios.get("http://localhost:3001/user/profile", {
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }
+    })
+    return response
+}
