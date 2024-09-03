@@ -5,6 +5,7 @@ import { fetchProfile } from '../../API/UserAPI'
 
 export default function Profile() {
   const [profile, setProfile] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchProfileRequest = async () => {
@@ -14,6 +15,8 @@ export default function Profile() {
         console.log(response.data)
       } catch (error) {
         console.log(error)
+      } finally {
+        setLoading(false)
       }
     }
     fetchProfileRequest()
@@ -22,16 +25,31 @@ export default function Profile() {
 
   return (
     <PrivatePageWrap type={"Profile"}>
-      <div className="page" id="profile-page">
-        <h2>Your Information</h2>
-        <section className="profile-info">
-          Information
-        </section>
-        <h2>Settings</h2>
-        <section className="profile-settings">
-          Settings
-        </section>
-      </div>
+      {!loading &&
+        <div className="page" id="profile-page">
+          <h2>Your Information</h2>
+          {profile && 
+            <section className="profile-info">
+              <div className="info-name">
+                <label>First Name</label>
+                <p>{profile.firstName}</p>
+                <label>Last Name</label>
+                <p>{profile.lastName}</p>
+              </div>
+              <label>Email</label>
+              <p>{profile.email}</p>
+              <label>Password</label>
+              <p></p>
+              <label>User Since</label>
+              <p>{profile.createdAt}</p>
+            </section>
+          }
+          <h2>Settings</h2>
+          <section className="profile-settings">
+            Settings
+          </section>
+        </div>
+      }
     </PrivatePageWrap>
   )
 }
