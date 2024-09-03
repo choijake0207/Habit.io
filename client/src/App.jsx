@@ -8,7 +8,9 @@ import { AuthProvider } from './Context/AuthContext'
 import { AuthContext } from './Context/AuthContext'
 import "./App.css"
 import PublicRootLayout from './Layouts/PublicRootLayout'
-import Dashboard from './Pages/Dashboard/Dashboard'
+import Home from './Pages/Home/Home'
+import Insights from './Pages/Insights/Insights'
+import Profile from './Pages/Profile/Profile'
 
 const PrivateRoutes = ({element}) => {
   const {authorizedUser} = useContext(AuthContext)
@@ -25,7 +27,9 @@ const router = createBrowserRouter(
       </Route>
 
       <Route element={<PrivateRoutes element={<RootLayout/>}/>}>
-        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/home" element={<Home/>}/>
+        <Route path="/insights" element={<Insights/>}/>
+        <Route path="/profile" element={<Profile/>}/>
       </Route>
     </>
   )
