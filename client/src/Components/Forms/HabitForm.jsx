@@ -6,7 +6,8 @@ export default function HabitForm({toggleVisibility}) {
     const [name, setName] = useState("")
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const startDate = new Date()
+        const now = new Date()
+        const startDate = `${now.toLocaleTimeString()}-${now.toLocaleDateString()}`
         try {
         const response = await createHabit(name, startDate)
         console.log(response)
