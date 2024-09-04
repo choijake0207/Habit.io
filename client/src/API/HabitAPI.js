@@ -3,6 +3,10 @@ export const createHabit = async (name, startDate) => {
     const response = await axios.post("http://localhost:3001/habit", {
         name,
         startDate
+    }, {
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }
     })
     return response
 }
