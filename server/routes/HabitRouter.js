@@ -50,5 +50,18 @@ router.get("/:id", validateToken, async (req, res) => {
     }
 })
 
+// delete habit
+router.delete("/:id", validateToken, async (req, res) => {
+    try {
+        const habitId = req.params.id
+        const habitToDelete = await Habit.destroy({
+            where: {id: habitId}
+        })
+        res.json("Habit Succesfully Deleted")
+    } catch (error) {
+        res.status(500).json({error: "An Error Occured Deleting Habit"})
+    }
+})
+
 
 module.exports = router
