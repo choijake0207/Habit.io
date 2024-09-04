@@ -37,7 +37,7 @@ router.get("/", validateToken, async (req, res) => {
 })
 
 // fetch single habit
-router.get("/", validateToken, async (req, res) => {
+router.get("/:id", validateToken, async (req, res) => {
     try {
         const habitId = req.params.id
         const userId = req.user.id
