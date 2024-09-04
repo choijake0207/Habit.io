@@ -22,5 +22,19 @@ router.post("/", validateToken, async (req, res) => {
     }
 })
 
+router.get("/", validateToken, async (req, res) => {
+    try {
+        const habits = await Habit.findAll({
+            where: {id: req.user.id}
+        })
+        if (!habits) {
+            return res.status(404).json({error: "No Existing Habits"})
+        }
+        res.json(habits)
+    } catch (error) {
+        res.status(500).json({error: "An Error Occured Fetching Habits"})
+    }
+})
+
 
 module.exports = router
