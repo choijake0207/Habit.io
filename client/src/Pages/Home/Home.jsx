@@ -1,28 +1,48 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./Home.css"
+import {Plus} from "phosphor-react"
+import { fetchAllHabits, createHabit } from '../../API/HabitAPI'
 export default function Home() {
+
+  const [allHabits, setAllHabits] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchHabits = async () => {
+      try {
+        const response = await fetchAllHabits()
+        setAllHabits(response.data)
+        console.log(response.data)
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchHabits()
+  }, [])
+
+
   return (
-    <PrivatePageWrap type={"Home"}>
+    <PrivatePageWrap type={"Welcome Back"}>
       <div className="page" id="home-page">
         <section className="daily-quote">
 
         </section>
         <ul className="habit-container">
-          <li className="habit">Habit 1</li>
-          <li className="habit">Habit 2</li>
-          <li className="habit">Habit 3</li>
-          <li className="habit">Habit 4</li>
-          <li className="habit">Habit 4</li>
-          <li className="habit">Habit 4</li>
-          <li className="habit">Habit 4</li>
-          <li className="habit">Habit 4</li>
-          <li className="habit">Habit 4</li>
-
+          {!loading && allHabits.length > 0 ? (
+            allHabits.map(habit => {
+              return (
+                <li className="habit">
+                  <p>{habit.name}</p>
+                </li>
+              )
+            })
+          ) : (<p>No Habits Yet!</p>)
+          }
         </ul>
-        <section className="home-widgets">
-          <div className="widget">Widget</div>
-        </section>
+       <button className="add-habit-btn"><Plus weight="fill"/></button>
       </div>
 
 
