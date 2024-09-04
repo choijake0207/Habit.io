@@ -2,11 +2,14 @@ import React, {useEffect, useState} from 'react'
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./Home.css"
 import {Plus} from "phosphor-react"
-import { fetchAllHabits, createHabit } from '../../API/HabitAPI'
+import { fetchAllHabits } from '../../API/HabitAPI'
+import HabitForm from '../../Components/Forms/HabitForm'
+
 export default function Home() {
 
   const [allHabits, setAllHabits] = useState([])
   const [loading, setLoading] = useState(true)
+  const [formVisible, setFormVisible] = useState(false)
 
   useEffect(() => {
     const fetchHabits = async () => {
@@ -22,6 +25,7 @@ export default function Home() {
     }
     fetchHabits()
   }, [])
+
 
 
   return (
@@ -42,8 +46,18 @@ export default function Home() {
           ) : (<p>No Habits Yet!</p>)
           }
         </ul>
-       <button className="add-habit-btn"><Plus weight="fill"/></button>
+        <button 
+          className="add-habit-btn"
+          onClick={() => setFormVisible(true)}
+        >
+          <Plus weight="fill"/>
+        </button>
       </div>
+      { formVisible && 
+        <HabitForm
+          toggleVisibility={() => setFormVisible(false)}
+        />
+      }
 
 
     </PrivatePageWrap>
