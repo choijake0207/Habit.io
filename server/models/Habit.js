@@ -18,5 +18,11 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: []
         }
     })
+    Habit.associate = (models) => {
+        Habit.belongsTo(models.User, {
+            foreignKey: "userId",
+            onDelete: "CASCADE"
+        })
+    }
     return Habit
 }
