@@ -11,6 +11,7 @@ import PublicRootLayout from './Layouts/PublicRootLayout'
 import Home from './Pages/Home/Home'
 import Insights from './Pages/Insights/Insights'
 import Profile from './Pages/Profile/Profile'
+import SingleHabitPage from './Pages/SingleView/SingleHabitPage'
 
 const PrivateRoutes = ({element}) => {
   const {authorizedUser, loading} = useContext(AuthContext)
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
         <Route path="/home" element={<Home/>}/>
         <Route path="/insights" element={<Insights/>}/>
         <Route path="/profile" element={<Profile/>}/>
+        <Route path="/habit/:id" element={<SingleHabitPage/>}/>
       </Route>
     </>
   )
