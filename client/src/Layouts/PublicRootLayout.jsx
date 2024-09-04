@@ -12,7 +12,7 @@ export default function PublicRootLayout() {
             <p onClick={(e) =>navigate("/") }>Habit.io</p>
             {authorizedUser.authStatus ? 
               <div className="public-nav-a authorized-nav-a">
-                <NavLink to="/dashboard">Go To Dashboard</NavLink>
+                <NavLink to="/home">Go To Portal</NavLink>
               </div>
             :
               <div className="public-nav-a">
