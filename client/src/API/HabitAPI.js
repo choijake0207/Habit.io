@@ -28,3 +28,12 @@ export const fetchSingleHabit = async (id) => {
     })
     return response
 }
+
+export const deleteHabit = async (id) => {
+    const response = await axios.delete(`http://localhost:3001/habit/${id}`, {
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }
+    })
+    return response
+}
