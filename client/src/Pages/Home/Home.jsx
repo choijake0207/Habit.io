@@ -4,6 +4,7 @@ import "./Home.css"
 import {Plus} from "phosphor-react"
 import { fetchAllHabits } from '../../API/HabitAPI'
 import HabitForm from '../../Components/Forms/HabitForm'
+import HabitCard from '../../Components/Habit/HabitCard'
 
 export default function Home() {
 
@@ -38,9 +39,7 @@ export default function Home() {
           {!loading && allHabits.length > 0 ? (
             allHabits.map(habit => {
               return (
-                <li className="habit">
-                  <p>{habit.name}</p>
-                </li>
+                <HabitCard habit={habit}/>
               )
             })
           ) : (<p>No Habits Yet!</p>)
