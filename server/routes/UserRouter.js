@@ -8,7 +8,7 @@ const {validateToken} = require("../middleware/AuthMiddleware")
 // persistent auth check
 router.get("/auth",validateToken, async (req, res) => {
     try {
-        const user = await User.findOne({where: {id: req.user.id}, attributes: ["email", "id"]})
+        const user = await User.findOne({where: {id: req.user.id}, attributes: ["email", "id", "firstName"]})
         res.json(user)
     } catch (error) {
         res.status(500).json({error: "Failed To Authorize User"})
