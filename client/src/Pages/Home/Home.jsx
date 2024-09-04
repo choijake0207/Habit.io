@@ -1,16 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./Home.css"
 import {Plus} from "phosphor-react"
 import { fetchAllHabits } from '../../API/HabitAPI'
 import HabitForm from '../../Components/Forms/HabitForm'
 import HabitCard from '../../Components/Habit/HabitCard'
+import { AuthContext } from '../../Context/AuthContext'
+import { createHabit } from '../../API/HabitAPI'
 
 export default function Home() {
 
   const [allHabits, setAllHabits] = useState([])
   const [loading, setLoading] = useState(true)
   const [formVisible, setFormVisible] = useState(false)
+  const {authorizedUser} = useContext(AuthContext)
 
   useEffect(() => {
     const fetchHabits = async () => {
@@ -27,10 +30,17 @@ export default function Home() {
     fetchHabits()
   }, [])
 
-
+  const handleCreateHabit = async (name, startDate) => {
+    try {
+      const response = await createHabit(name, startDate)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
-    <PrivatePageWrap type={"Welcome Back"}>
+    <PrivatePageWrap type={`Welcome ${authorizedUser.firstName}`}>
       <div className="page" id="home-page">
         <section className="daily-quote">
 
@@ -55,6 +65,7 @@ export default function Home() {
       { formVisible && 
         <HabitForm
           toggleVisibility={() => setFormVisible(false)}
+          createHabit={handleCreateHabit}
         />
       }
 

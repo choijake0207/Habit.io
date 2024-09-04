@@ -2,20 +2,15 @@ import React, {useState} from 'react'
 import "./Form.css"
 import { createHabit } from '../../API/HabitAPI'
 
-export default function HabitForm({toggleVisibility}) {
+export default function HabitForm({toggleVisibility, createHabit}) {
     const [name, setName] = useState("")
     const handleSubmit = async (e) => {
         e.preventDefault()
         const now = new Date()
         const startDate = `${now.toLocaleTimeString()}-${now.toLocaleDateString()}`
-        try {
-        const response = await createHabit(name, startDate)
-        console.log(response)
+        createHabit(name, startDate)
         setName("")
         toggleVisibility()
-        } catch (error) {
-            console.log(error)
-        }
     }
   return (
     <div className="form-overlay">
