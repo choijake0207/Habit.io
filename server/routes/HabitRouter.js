@@ -12,6 +12,7 @@ router.post("/", validateToken, async (req, res) => {
         const newHabit = await Habit.create({
             name: name,
             startDate: startDate,
+            creationDate: startDate,
             userId: id,
         })
         res.json({
@@ -54,8 +55,11 @@ router.get("/:id", validateToken, async (req, res) => {
 router.delete("/:id", validateToken, async (req, res) => {
     try {
         const habitId = req.params.id
-        const habitToDelete = await Habit.destroy({
+        const habitToDelete = await Habit.findOne({
             where: {id: habitId}
+        })
+        await Habit.destroy({
+            where: {id: habitToDelete.id}
         })
         res.json("Habit Succesfully Deleted")
     } catch (error) {
