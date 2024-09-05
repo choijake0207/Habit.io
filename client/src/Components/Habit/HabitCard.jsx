@@ -15,6 +15,7 @@ export default function HabitCard({habit}) {
         <p>Started on {date}</p>
         <Timer
             start={habit.startDate}
+            type={"Hours"}
         />
     </li>
   )

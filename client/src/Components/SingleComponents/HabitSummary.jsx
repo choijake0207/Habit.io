@@ -23,6 +23,7 @@ export default function HabitSummary({habit}) {
         </div>
         <Timer
             start={habit.startDate}
+            type={timeSetting}
         />
         <p>Started on {date}</p>
     </section>
