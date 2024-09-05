@@ -5,6 +5,7 @@ import "./SingleHabitPage.css"
 import { useParams } from 'react-router-dom'
 import HabitStats from '../../Components/SingleComponents/HabitStats'
 import HabitSummary from '../../Components/SingleComponents/HabitSummary'
+import HabitButtons from '../../Components/SingleComponents/HabitButtons'
 
 export default function SingleHabitPage() {
   const {id} = useParams()
@@ -30,6 +31,7 @@ export default function SingleHabitPage() {
     <PrivatePageWrap type={"single"}>
       {!loading && <div className="page" id="single-habit-page">
         <HabitSummary habit={habit}/>
+        <HabitButtons habit={habit}/>
         <HabitStats habit={habit}/>
       
       </div>}
