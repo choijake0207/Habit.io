@@ -16,6 +16,23 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.JSON,
             allowNull: false,
             defaultValue: []
+        },
+        creationDate: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        pauseDate: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        status: {
+            type: DataTypes.ENUM("ongoing", "paused", "completed"),
+            allowNull: false,
+            defaultValue: "ongoing"
+        },
+        goalDuration: {
+            type: DataTypes.INTEGER,
+            allowNull: true
         }
     })
     Habit.associate = (models) => {
