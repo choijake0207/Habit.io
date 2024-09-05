@@ -1,9 +1,13 @@
 import React from 'react'
+import { ChartBar } from 'phosphor-react'
 
 export default function HabitStats({habit}) {
   return (
     <section className="habit-stats">
-        <h2>Stats</h2>
+        <header className="stats-header">
+            <ChartBar size="2em"/>
+            <h2>Stats</h2>
+        </header>
         <div className="stats-container">
         <div className="resets">
             <p>{habit.streaks.length}</p>
