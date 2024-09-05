@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import "./Timer.css"
 
-export default function Timer({start}) {
-    const [lapse, setLapse] = useState(0)
+export default function Timer({start, type}) {
+    const [lapse, setLapse] = useState(() => {
+        const [time, date] = start.split("-")
+        const formattedStart = new Date(`${date} ${time}`)
+        const now = new Date()
+        return now - formattedStart
+    })
     useEffect(() => {
         const [time, date] = start.split("-")
         const formattedStart = new Date(`${date} ${time}`)
@@ -22,7 +27,9 @@ export default function Timer({start}) {
   return (
     <div className="timer">
         <h4 className="timer-count">
-            {weeks}W {days}D {hours}H {minutes}M {seconds}s
+            {hours} Hours
+            {minutes} Minutes
+            {seconds} Seconds
         </h4>
     </div>
   )
