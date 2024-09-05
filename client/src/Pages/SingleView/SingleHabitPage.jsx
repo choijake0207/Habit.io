@@ -3,7 +3,8 @@ import {fetchSingleHabit} from "../../API/HabitAPI"
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./SingleHabitPage.css"
 import { useParams } from 'react-router-dom'
-import Timer from '../../Components/Timer/Timer'
+import HabitStats from '../../Components/SingleComponents/HabitStats'
+import HabitSummary from '../../Components/SingleComponents/HabitSummary'
 
 export default function SingleHabitPage() {
   const {id} = useParams()
@@ -28,38 +29,9 @@ export default function SingleHabitPage() {
   return (
     <PrivatePageWrap type={"single"}>
       {!loading && <div className="page" id="single-habit-page">
-        <section className="habit-summary">
-          <h1>{habit.name}</h1>
-          <h2>Current Streak</h2>
-          <div className="summary-timer">
-            <Timer
-              start={habit.startDate}
-            />
-          </div>
-          <p>{habit.startDate}</p>
-        </section>
-        <section className="habit-stats">
-          <h2>Stats</h2>
-          <div className="stats-container">
-            <div className="resets">
-              <p>{habit.streaks.length}</p>
-              <label>Resets</label>
-            </div>
-            <div className="total-lapse">
-              <p>0</p>
-              <label>Since Start</label>
-            </div>
-            <div className="longest-streak">
-              <p>0</p>
-              <label>Longest Streak</label>
-            </div>
-            <div className="avg-streak">
-              <p>0</p>
-              <label>Average Streak</label>
-            </div>
-          </div>
-        </section>
-
+        <HabitSummary habit={habit}/>
+        <HabitStats habit={habit}/>
+      
       </div>}
     </PrivatePageWrap>
   )
