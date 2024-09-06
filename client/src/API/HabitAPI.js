@@ -38,3 +38,12 @@ export const deleteHabit = async (id) => {
     })
     return response
 }
+
+export const resetHabit = async (id) => {
+    const response = await axios.put(`http://localhost:3001/habit/${id}`, {
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }
+    })
+    return response
+}
