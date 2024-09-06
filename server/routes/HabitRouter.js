@@ -92,12 +92,19 @@ router.put("/:id", validateToken, async (req, res) => {
             endDate: endDate
         }
         const updatedStreaks = [...habit.streaks, newStreak]
+        habit.streaks = updatedStreaks
         habit.startDate = endDate.toISOString
         habit.endDate = null
         await habit.save()
         res.json({
             message: "Habit Succesfully Restarted",
-            habit
+            habit: {
+                id: habit.id,
+                name: habit.name,
+                startDate: habit.startDate,
+                streaks: habit.streaks,
+                endDate: habit.endDate
+            }
         })
     } catch (error) {
         res.status(500).json({error: "Failed To Restart Habit"})
