@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import "./Form.css"
 import { createHabit } from '../../API/HabitAPI'
 
-export default function HabitForm({ createHabit}) {
+export default function HabitForm({ createHabit, onClose}) {
     const colors = ["red", "blue", "green", "orange", "purple"]
     const randomColor = colors[Math.floor(Math.random() * colors.length)]
     const [name, setName] = useState("")
@@ -40,7 +40,7 @@ export default function HabitForm({ createHabit}) {
                 })}
             </div>
             <button type="submit">Create</button>
-            <button type="button">Cancel</button>
+            <button type="button" onClick={onClose}>Cancel</button>
         </form>
     </div>
   )
