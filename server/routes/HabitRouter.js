@@ -88,12 +88,12 @@ router.put("/:id", validateToken, async (req, res) => {
         const streakDuration = endDate - startDate
         const newStreak = {
             duration: streakDuration,
-            startDate: startDate,
-            endDate: endDate
+            startDate: habit.startDate,
+            endDate: `${endDate.toLocaleTimeString()}-${endDate.toLocaleDateString()}`
         }
         const updatedStreaks = [...habit.streaks, newStreak]
         habit.streaks = updatedStreaks
-        habit.startDate = endDate.toISOString
+        habit.startDate = `${endDate.toLocaleTimeString()}-${endDate.toLocaleDateString()}`
         habit.endDate = null
         await habit.save()
         res.json({
