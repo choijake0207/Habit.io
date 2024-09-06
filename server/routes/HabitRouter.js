@@ -12,9 +12,10 @@ router.post("/", validateToken, async (req, res) => {
         const newHabit = await Habit.create({
             name: name,
             startDate: startDate,
+            color: color, 
             creationDate: startDate,
             userId: id,
-            color: color
+            
         })
         res.json({
             message: "Habit Succesfully Created",
@@ -66,6 +67,40 @@ router.delete("/:id", validateToken, async (req, res) => {
         res.json("Habit Succesfully Deleted")
     } catch (error) {
         res.status(500).json({error: "An Error Occured Deleting Habit"})
+    }
+})
+
+// reset timer 
+router.put("/:id", validateToken, async (req, res) => {
+    const habitId = req.params.id
+    const userId = req.user.id
+    try {
+        const habit = await Habit.findOne({
+            where: {
+                id: habitId,
+                userId: userId
+            }
+        })
+        if (!habit) { return res.status(404).json({error: "Habit Can Not Be Found"})}
+        const endDate = new Date()
+        const [time, date] = habit.startDate.split("-")
+        const startDate = new Date(`${date} ${time}`)
+        const streakDuration = endDate - startDate
+        const newStreak = {
+            duration: streakDuration,
+            startDate: startDate,
+            endDate: endDate
+        }
+        const updatedStreaks = [...habit.streaks, newStreak]
+        habit.startDate = endDate.toISOString
+        habit.endDate = null
+        await habit.save()
+        res.json({
+            message: "Habit Succesfully Restarted",
+            habit
+        })
+    } catch (error) {
+        res.status(500).json({error: "Failed To Restart Habit"})
     }
 })
 
