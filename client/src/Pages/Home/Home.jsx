@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./Home.css"
-import {Plus} from "phosphor-react"
+import {Plus, SquaresFour, FunnelSimple} from "phosphor-react"
 import { fetchAllHabits } from '../../API/HabitAPI'
 import HabitForm from '../../Components/Forms/HabitForm'
 import HabitCard from '../../Components/Habit/HabitCard'
@@ -54,9 +54,24 @@ export default function Home() {
     <PrivatePageWrap type={`Welcome ${authorizedUser.firstName}`}>
       <div className="page" id="home-page">
         <section className="daily-quote">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+          </p>
         </section>
-        <h2>Your Habits</h2>
+        <div className="habit-toolbar">
+          <h2>Your Habits</h2>
+          <div className="sort-and-filter">
+            <div className="sort">
+              <SquaresFour/>
+              <p>Sort</p>
+            </div>
+            <div className="filter">
+              <FunnelSimple/>
+              <p>Filter</p>
+            </div>
+          </div>
+        </div>
+
         <ul className="habit-container">
           {!loading && allHabits.length > 0 ? (
             allHabits.map(habit => {
