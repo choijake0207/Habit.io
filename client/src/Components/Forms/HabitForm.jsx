@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import "./Form.css"
 import { createHabit } from '../../API/HabitAPI'
 
-export default function HabitForm({toggleVisibility, createHabit}) {
+export default function HabitForm({ createHabit}) {
     const colors = ["red", "blue", "green", "orange", "purple"]
     const randomColor = colors[Math.floor(Math.random() * colors.length)]
     const [name, setName] = useState("")
@@ -14,7 +14,6 @@ export default function HabitForm({toggleVisibility, createHabit}) {
         const startDate = `${now.toLocaleTimeString()}-${now.toLocaleDateString()}`
         createHabit(name, startDate, color)
         setName("")
-        toggleVisibility()
     }
   return (
     <div className="form-overlay">
@@ -41,7 +40,7 @@ export default function HabitForm({toggleVisibility, createHabit}) {
                 })}
             </div>
             <button type="submit">Create</button>
-            <button type="button" onClick={toggleVisibility}>Cancel</button>
+            <button type="button">Cancel</button>
         </form>
     </div>
   )
