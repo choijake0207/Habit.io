@@ -32,10 +32,11 @@ export default function Home() {
     fetchHabits()
   }, [])
 
-  const handleCreateHabit = async (name, startDate) => {
+  const handleCreateHabit = async (name, startDate, color) => {
     const temporaryHabit = {
       name,
       startDate,
+      color,
       id: "temporary"
     }
     setAllHabits(prev => [...prev, temporaryHabit])
@@ -79,7 +80,10 @@ export default function Home() {
           {!loading && allHabits.length > 0 ? (
             allHabits.map(habit => {
               return (
-                <HabitCard habit={habit}/>
+                <HabitCard 
+                  habit={habit}
+                  key={habit.id}
+                />
               )
             })
           ) : (<p>No Habits Yet!</p>)

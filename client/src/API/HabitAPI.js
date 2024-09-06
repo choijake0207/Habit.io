@@ -1,8 +1,9 @@
 import axios from "axios"
-export const createHabit = async (name, startDate) => {
+export const createHabit = async (name, startDate, color) => {
     const response = await axios.post("http://localhost:3001/habit", {
         name,
-        startDate
+        startDate,
+        color
     }, {
         headers: {
             accessToken: localStorage.getItem("accessToken")
