@@ -16,7 +16,8 @@ router.post("/", validateToken, async (req, res) => {
             userId: id,
         })
         res.json({
-            message: "Habit Created Succesfully"
+            message: "Habit Succesfully Created",
+            id: newHabit.id
         })
     } catch (error) {
         res.status(500).json({error: "Failed To Create Habit"})
