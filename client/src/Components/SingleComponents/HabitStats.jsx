@@ -9,6 +9,13 @@ export default function HabitStats({habit}) {
     }
     const longestStreak = findLongestStreak(habit.streaks)
 
+    const findAverageStreak = (streaks) => {
+        if (streaks.length < 2) return 0
+        const totalDuration = streaks.reduce((total, streak) => total + streak.duration, 0)
+        const averageDuration = totalDuration / streaks.length
+        return averageDuration
+    }
+    const averageStreak = findAverageStreak(habit.streaks)
     const streakFormatter = (duration) => {
         const minutes = Math.floor((duration/1000/60) % 60)
         const hours = Math.floor((duration/(1000*60*60)) % 24)
@@ -38,7 +45,7 @@ export default function HabitStats({habit}) {
             <label>Longest Streak</label>
         </div>
         <div className="avg-streak">
-            <p>0</p>
+            <p>{streakFormatter(averageStreak)}</p>
             <label>Average Streak</label>
         </div>
         </div>
