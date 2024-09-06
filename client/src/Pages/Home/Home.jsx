@@ -7,6 +7,7 @@ import HabitForm from '../../Components/Forms/HabitForm'
 import HabitCard from '../../Components/Habit/HabitCard'
 import { AuthContext } from '../../Context/AuthContext'
 import { createHabit } from '../../API/HabitAPI'
+import { useNavigate } from 'react-router-dom'
 
 export default function Home() {
 
@@ -14,6 +15,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [formVisible, setFormVisible] = useState(false)
   const {authorizedUser} = useContext(AuthContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchHabits = async () => {
@@ -44,6 +46,7 @@ export default function Home() {
         habit.id === temporaryHabit.id ? createdHabit : habit
       ))
       console.log(response)
+      navigate(`/habit/${response.data.id}`)
     } catch (error) {
       setAllHabits(prev => prev.filter(habit => habit.id !== temporaryHabit.id))
       console.log(error)
