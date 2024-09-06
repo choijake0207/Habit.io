@@ -7,13 +7,14 @@ const {validateToken} = require("../middleware/AuthMiddleware")
 // post habit
 router.post("/", validateToken, async (req, res) => {
     try {
-        const {name, startDate} = req.body
+        const {name, startDate, color} = req.body
         const id = req.user.id
         const newHabit = await Habit.create({
             name: name,
             startDate: startDate,
             creationDate: startDate,
             userId: id,
+            color: color
         })
         res.json({
             message: "Habit Succesfully Created",
