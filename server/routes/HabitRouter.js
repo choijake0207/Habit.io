@@ -103,7 +103,8 @@ router.put("/:id", validateToken, async (req, res) => {
                 name: habit.name,
                 startDate: habit.startDate,
                 streaks: habit.streaks,
-                endDate: habit.endDate
+                endDate: habit.endDate,
+                creationDate: habit.creationDate
             }
         })
     } catch (error) {
