@@ -41,13 +41,13 @@ export default function Home() {
     }
     setAllHabits(prev => [...prev, temporaryHabit])
     try {
-      const response = await createHabit(name, startDate)
+      const response = await createHabit(name, startDate, color)
       const createdHabit = response.data
+      navigate(`/habit/${response.data.id}`)
       setAllHabits(prev => prev.map(habit => 
         habit.id === temporaryHabit.id ? createdHabit : habit
       ))
       console.log(response)
-      navigate(`/habit/${response.data.id}`)
     } catch (error) {
       setAllHabits(prev => prev.filter(habit => habit.id !== temporaryHabit.id))
       console.log(error)
@@ -75,20 +75,23 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {!loading && allHabits.length > 0 ? (
+          <ul className="habit-container">
+            {allHabits.map(habit => {
+                return (
+                  <HabitCard 
+                    habit={habit}
+                    key={habit.id}
+                  />
+                )
+              })}
+          </ul>
+        ) : (
+          <div className="empty-container">
+            <h3>No Habits Created Yet</h3>
+          </div>
+        )}
 
-        <ul className="habit-container">
-          {!loading && allHabits.length > 0 ? (
-            allHabits.map(habit => {
-              return (
-                <HabitCard 
-                  habit={habit}
-                  key={habit.id}
-                />
-              )
-            })
-          ) : (<p>No Habits Yet!</p>)
-          }
-        </ul>
         <button 
           className="add-habit-btn"
           onClick={() => setFormVisible(true)}
@@ -98,8 +101,8 @@ export default function Home() {
       </div>
       { formVisible && 
         <HabitForm
-          toggleVisibility={() => setFormVisible(false)}
           createHabit={handleCreateHabit}
+          onClose={() => setFormVisible(false)}
         />
       }
 
