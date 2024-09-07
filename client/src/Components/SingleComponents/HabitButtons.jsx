@@ -1,10 +1,10 @@
 import React from 'react'
 import { Pause, ArrowCounterClockwise, Flag } from 'phosphor-react'
 
-export default function HabitButtons({onReset, habit}) {
+export default function HabitButtons({onReset, habit, onPause}) {
   return (
     <section className="habit-buttons">
-        <button className="pause-btn">
+        <button className="pause-btn" onClick={onPause}>
             <Pause/>
             Pause
         </button>
