@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./Timer.css"
 
-export default function Timer({start, type}) {
+export default function Timer({start, type, status, pauseDuration}) {
+    const [pauseTime, setPauseTime] = useState(pauseDuration)
     const [lapse, setLapse] = useState(() => {
         const [time, date] = start.split("-")
         const formattedStart = new Date(`${date} ${time}`)
@@ -9,16 +10,18 @@ export default function Timer({start, type}) {
         return now - formattedStart
     })
     useEffect(() => {
+        if (status === "paused") {return}
         const [time, date] = start.split("-")
         const formattedStart = new Date(`${date} ${time}`)
         const interval = setInterval(() => {
             const now = new Date()
-            setLapse(now - formattedStart)
+            setLapse(now - formattedStart - pauseDuration)
         }, 1000)
         return () => {
             clearInterval(interval)
         }
-    }, [start])
+    }, [start,status])
+    const seconds = Math.floor((lapse / 1000) % 60)
     const minutes = Math.floor((lapse / 1000 / 60) % 60);
     const hours = Math.floor((lapse / (1000 * 60 * 60)) % 24);
     const days = Math.floor((lapse / (1000 * 60 * 60 * 24)) % 7);
@@ -32,7 +35,7 @@ export default function Timer({start, type}) {
         {(() => {
             switch (type) {
                 case "Hours":
-                    return <h4>{hours} Hours {minutes} Minutes</h4>
+                    return <h4>{hours} Hours {minutes} Minutes {seconds} Seconds</h4>
                 case "Days":
                     return <h4>{days} Days {hours} Hours {minutes} Minutes</h4>
                 case "Weeks":
