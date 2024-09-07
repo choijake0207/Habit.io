@@ -112,5 +112,30 @@ router.put("/:id", validateToken, async (req, res) => {
     }
 })
 
+// pause timer
+router.put("/:id", validateToken, async (req, res) => {
+    const habitId = req.params.id
+    const userId = req.user.id
+    try {
+        const habit = await Habit.findOne({
+            where: {
+                id: habitId,
+                userId: userId
+            }
+        })
+        if (!habit) {return res.status(404).json({error: "Habit Can Not Be Found"})}
+        if (habit.status === "paused") { return res.status(400).json({error: "Habit Is Already Paused"})}
+        habit.status = "paused"
+        const pauseDate = new Date()
+        habit.pauseDate = `${pauseDate.toLocaleTimeString()}-${pauseDate.toLocaleDateString()}`
+        await habit.save()
+        res.json({
+            message: "Habit Paused Successfully",
+            habit: habit
+        })
+    } catch (error) {
+        res.status(500).json({error: "Failed To Pause Habit"})
+    }
+})
 
 module.exports = router
