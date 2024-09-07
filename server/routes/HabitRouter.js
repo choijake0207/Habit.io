@@ -85,7 +85,8 @@ router.put("/reset/:id", validateToken, async (req, res) => {
         const endDate = new Date()
         const [time, date] = habit.startDate.split("-")
         const startDate = new Date(`${date} ${time}`)
-        const streakDuration = endDate - startDate
+        const totalDuration = endDate - startDate
+        const streakDuration = totalDuration - habit.pausedDuration
         const newStreak = {
             duration: streakDuration,
             startDate: habit.startDate,
@@ -95,6 +96,7 @@ router.put("/reset/:id", validateToken, async (req, res) => {
         habit.streaks = updatedStreaks
         habit.startDate = `${endDate.toLocaleTimeString()}-${endDate.toLocaleDateString()}`
         habit.endDate = null
+        habit.pausedDuration = 0
         await habit.save()
         res.json({
             message: "Habit Succesfully Restarted",
@@ -131,6 +133,7 @@ router.put("/pause/:id", validateToken, async (req, res) => {
             const pausedDuration = now - pauseDate
             habit.status = "ongoing"
             habit.pauseDate = null
+            habit.pausedDuration += pausedDuration
             await habit.save()
             res.json({
                 message: "Habit Resumed Succesfully",
