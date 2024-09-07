@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import HabitStats from '../../Components/SingleComponents/HabitStats'
 import HabitSummary from '../../Components/SingleComponents/HabitSummary'
 import HabitButtons from '../../Components/SingleComponents/HabitButtons'
-import { resetHabit as resetAPI } from '../../API/HabitAPI'
+import { resetHabit as resetAPI, pauseHabit as pauseAPI } from '../../API/HabitAPI'
 
 export default function SingleHabitPage() {
   const {id} = useParams()
@@ -38,11 +38,21 @@ export default function SingleHabitPage() {
     }
   }
 
+  const pauseHabit = async () => {
+    try {
+      const response = await pauseAPI(id)
+      setHabit(response.data.habit)
+      console.log(response.data.habit)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <PrivatePageWrap type={"single"}>
       {!loading && <div className="page" id="single-habit-page">
         <HabitSummary habit={habit}/>
-        <HabitButtons habit={habit} onReset={resetHabit}/>
+        <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit}/>
         <HabitStats habit={habit}/>
       
       </div>}
