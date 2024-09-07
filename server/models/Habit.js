@@ -37,6 +37,11 @@ module.exports = (sequelize, DataTypes) => {
         color: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        pauseDuration: {
+            type: DataTypes.BIGINT,
+            allowNull: false,
+            defaultValue: 0
         }
     })
     Habit.associate = (models) => {
