@@ -124,17 +124,30 @@ router.put("/pause/:id", validateToken, async (req, res) => {
             }
         })
         if (!habit) {return res.status(404).json({error: "Habit Can Not Be Found"})}
-        if (habit.status === "paused") { return res.status(400).json({error: "Habit Is Already Paused"})}
-        habit.status = "paused"
-        const pauseDate = new Date()
-        habit.pauseDate = `${pauseDate.toLocaleTimeString()}-${pauseDate.toLocaleDateString()}`
-        await habit.save()
-        res.json({
-            message: "Habit Paused Successfully",
-            habit: habit
-        })
+        if (habit.status === "paused") { 
+            const now = new Date()
+            const [time, date] = habit.pauseDate
+            const pauseDate = `${date} ${time}`
+            const pausedDuration = now - pauseDate
+            habit.status = "ongoing"
+            habit.pauseDate = null
+            await habit.save()
+            res.json({
+                message: "Habit Resumed Succesfully",
+                habit: habit
+            })
+        } else {
+            habit.status = "paused"
+            const pauseDate = new Date()
+            habit.pauseDate = `${pauseDate.toLocaleTimeString()}-${pauseDate.toLocaleDateString()}`
+            await habit.save()
+            res.json({
+                message: "Habit Paused Successfully",
+                habit: habit
+            })
+        }
     } catch (error) {
-        res.status(500).json({error: "Failed To Pause Habit"})
+        res.status(500).json({error: "Failed To Pause/Resume Habit"})
     }
 })
 
