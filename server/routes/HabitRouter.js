@@ -55,7 +55,7 @@ router.get("/:id", validateToken, async (req, res) => {
 })
 
 // delete habit
-router.delete("/:id", validateToken, async (req, res) => {
+router.delete("/delete/:id", validateToken, async (req, res) => {
     try {
         const habitId = req.params.id
         const habitToDelete = await Habit.findOne({
@@ -71,7 +71,7 @@ router.delete("/:id", validateToken, async (req, res) => {
 })
 
 // reset timer 
-router.put("/:id", validateToken, async (req, res) => {
+router.put("/reset/:id", validateToken, async (req, res) => {
     const habitId = req.params.id
     const userId = req.user.id
     try {
@@ -113,7 +113,7 @@ router.put("/:id", validateToken, async (req, res) => {
 })
 
 // pause timer
-router.put("/:id", validateToken, async (req, res) => {
+router.put("/pause/:id", validateToken, async (req, res) => {
     const habitId = req.params.id
     const userId = req.user.id
     try {
