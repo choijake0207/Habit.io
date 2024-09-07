@@ -27,6 +27,7 @@ export default function HabitSummary({habit}) {
             type={timeSetting}
             status={habit.status}
             pauseDuration={habit.pauseDuration}
+            pauseDate={habit.pauseDate}
         />
         <p>Started on {date}</p>
     </section>

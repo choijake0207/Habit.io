@@ -18,6 +18,7 @@ export default function HabitCard({habit}) {
             type={"Hours"}
             status={habit.status}
             pauseDuration={habit.pauseDuration}
+            pauseDate={habit.pauseDate}
         />
     </li>
   )
