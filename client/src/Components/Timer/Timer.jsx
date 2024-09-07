@@ -5,11 +5,11 @@ export default function Timer({start, type, status, pauseDuration, pauseDate}) {
     const [lapse, setLapse] = useState(() => {
         const [time, date] = start.split("-")
         const formattedStart = new Date(`${date} ${time}`)
-        const [pTime, pDate] = pauseDate.split("-")
-        const formattedPause = new Date(`${pDate} ${pTime}`)
+        
         const now = new Date()
         if (status === "paused") {
-
+            const [pTime, pDate] = pauseDate.split("-")
+            const formattedPause = new Date(`${pDate} ${pTime}`)
             return formattedPause - formattedStart - pauseDuration
         }
         return now - formattedStart - pauseDuration
