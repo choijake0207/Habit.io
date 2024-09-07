@@ -31,7 +31,7 @@ export const fetchSingleHabit = async (id) => {
 }
 
 export const deleteHabit = async (id) => {
-    const response = await axios.delete(`http://localhost:3001/habit/${id}`, {
+    const response = await axios.delete(`http://localhost:3001/habit/delete/${id}`, {
         headers: {
             accessToken: localStorage.getItem("accessToken")
         }
@@ -40,7 +40,7 @@ export const deleteHabit = async (id) => {
 }
 
 export const resetHabit = async (id) => {
-    const response = await axios.put(`http://localhost:3001/habit/${id}`,{}, {
+    const response = await axios.put(`http://localhost:3001/habit/reset/${id}`,{}, {
         headers: {
             accessToken: localStorage.getItem("accessToken")
         }
@@ -49,7 +49,7 @@ export const resetHabit = async (id) => {
 }
 
 export const pauseHabit = async (id) => {
-    const response = await axios.put(`http://localhost:3001/habit/${id}`, {}, {
+    const response = await axios.put(`http://localhost:3001/habit/pause/${id}`, {}, {
         headers: {
             accessToken: localStorage.getItem("accessToken")
         }
