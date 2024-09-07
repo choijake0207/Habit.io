@@ -86,7 +86,7 @@ router.put("/reset/:id", validateToken, async (req, res) => {
         const [time, date] = habit.startDate.split("-")
         const startDate = new Date(`${date} ${time}`)
         const totalDuration = endDate - startDate
-        const streakDuration = totalDuration - habit.pausedDuration
+        const streakDuration = totalDuration - habit.pauseDuration
         const newStreak = {
             duration: streakDuration,
             startDate: habit.startDate,
@@ -96,7 +96,7 @@ router.put("/reset/:id", validateToken, async (req, res) => {
         habit.streaks = updatedStreaks
         habit.startDate = `${endDate.toLocaleTimeString()}-${endDate.toLocaleDateString()}`
         habit.endDate = null
-        habit.pausedDuration = 0
+        habit.pauseDuration = 0
         await habit.save()
         res.json({
             message: "Habit Succesfully Restarted",
@@ -128,12 +128,11 @@ router.put("/pause/:id", validateToken, async (req, res) => {
         if (!habit) {return res.status(404).json({error: "Habit Can Not Be Found"})}
         if (habit.status === "paused") { 
             const now = new Date()
-            const [time, date] = habit.pauseDate
-            const pauseDate = `${date} ${time}`
-            const pausedDuration = now - pauseDate
+            const [time, date] = habit.pauseDate.split("-")
+            const pauseDate = new Date(`${date} ${time}`)
+            const timePassed = now - pauseDate
             habit.status = "ongoing"
-            habit.pauseDate = null
-            habit.pausedDuration += pausedDuration
+            habit.pauseDuration += timePassed
             await habit.save()
             res.json({
                 message: "Habit Resumed Succesfully",
