@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import "./Timer.css"
 
-export default function Timer({start, type, status, pauseDuration}) {
-    const [pauseTime, setPauseTime] = useState(pauseDuration)
+export default function Timer({start, type, status, pauseDuration, pauseDate}) {
     const [lapse, setLapse] = useState(() => {
         const [time, date] = start.split("-")
         const formattedStart = new Date(`${date} ${time}`)
+        const [pTime, pDate] = pauseDate.split("-")
+        const formattedPause = new Date(`${pDate} ${pTime}`)
         const now = new Date()
-        return now - formattedStart
+        if (status === "paused") {
+
+            return formattedPause - formattedStart - pauseDuration
+        }
+        return now - formattedStart - pauseDuration
     })
     useEffect(() => {
         if (status === "paused") {return}
@@ -20,7 +25,7 @@ export default function Timer({start, type, status, pauseDuration}) {
         return () => {
             clearInterval(interval)
         }
-    }, [start,status])
+    }, [start,status, pauseDuration])
     const seconds = Math.floor((lapse / 1000) % 60)
     const minutes = Math.floor((lapse / 1000 / 60) % 60);
     const hours = Math.floor((lapse / (1000 * 60 * 60)) % 24);
