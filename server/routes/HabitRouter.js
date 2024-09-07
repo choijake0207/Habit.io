@@ -97,17 +97,11 @@ router.put("/reset/:id", validateToken, async (req, res) => {
         habit.startDate = `${endDate.toLocaleTimeString()}-${endDate.toLocaleDateString()}`
         habit.endDate = null
         habit.pauseDuration = 0
+        habit.status = "ongoing"
         await habit.save()
         res.json({
             message: "Habit Succesfully Restarted",
-            habit: {
-                id: habit.id,
-                name: habit.name,
-                startDate: habit.startDate,
-                streaks: habit.streaks,
-                endDate: habit.endDate,
-                creationDate: habit.creationDate
-            }
+            habit: habit
         })
     } catch (error) {
         res.status(500).json({error: "Failed To Restart Habit"})
