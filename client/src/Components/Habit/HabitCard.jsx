@@ -8,7 +8,7 @@ export default function HabitCard({habit}) {
  const navigate = useNavigate()
   
   return (
-    <li className="habit-card"
+    <li className={`habit-card ${habit.color}`}
       onClick={() => navigate(`/habit/${habit.id}`)}
     >
         <h3>{habit.name}</h3>
@@ -16,6 +16,8 @@ export default function HabitCard({habit}) {
         <Timer
             start={habit.startDate}
             type={"Hours"}
+            status={habit.status}
+            pauseDuration={habit.pauseDuration}
         />
     </li>
   )

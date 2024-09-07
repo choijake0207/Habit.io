@@ -13,6 +13,7 @@ export default function HabitSummary({habit}) {
           {timeSettings.map(type => {
             return (
               <button 
+                key={type}
                 onClick={() => setTimeSetting(type)}
                 className={type === timeSetting && `active`}
               >
@@ -24,6 +25,8 @@ export default function HabitSummary({habit}) {
         <Timer
             start={habit.startDate}
             type={timeSetting}
+            status={habit.status}
+            pauseDuration={habit.pauseDuration}
         />
         <p>Started on {date}</p>
     </section>
