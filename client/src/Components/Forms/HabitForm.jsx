@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import "./Form.css"
-import { createHabit } from '../../API/HabitAPI'
+import HabitCard from "../Habit/HabitCard"
 
 export default function HabitForm({ createHabit, onClose}) {
     const colors = ["red", "blue", "green", "orange", "purple"]
@@ -18,6 +18,7 @@ export default function HabitForm({ createHabit, onClose}) {
   return (
     <div className="form-overlay">
         <form className="habit-form" onSubmit={handleSubmit}>
+            <HabitCard forDisplay={true} color={color}/>
             <input
                 type="text"
                 value={name}
