@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./Home.css"
-import {Plus, SquaresFour, FunnelSimple} from "phosphor-react"
+import {Plus, SquaresFour, FunnelSimple, FolderOpen} from "phosphor-react"
 import { fetchAllHabits } from '../../API/HabitAPI'
 import HabitForm from '../../Components/Forms/HabitForm'
 import HabitCard from '../../Components/Habit/HabitCard'
@@ -96,6 +96,7 @@ export default function Home() {
           </ul>
         ) : (
           <div className="empty-container">
+            <FolderOpen size={"4em"}/>
             <h3>No Habits Created Yet</h3>
           </div>
         )}
