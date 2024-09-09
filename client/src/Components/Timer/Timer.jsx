@@ -44,11 +44,11 @@ export default function Timer({start, type, status, pauseDuration, pauseDate}) {
                 case "Days":
                     return <h4>{days} Days {hours} Hours {minutes} Minutes</h4>
                 case "Weeks":
-                    return <h4> {weeks} Weeks {days} Days {hours} Hours {minutes} Minutes </h4>
+                    return <h4> {weeks} Weeks {days} Days {hours} Hours </h4>
                 case "Months":
-                    return <h4>{months} Months {weeks} Weeks {days} Days {hours} Hours {minutes} Minutes </h4>
+                    return <h4>{months} Months {weeks} Weeks {days} Days  </h4>
                 case "Years":
-                    return <h4>{years} Years {months} Months {weeks} Weeks {days} Days {hours} Hours</h4>  
+                    return <h4>{years} Years {months} Months {weeks} Weeks</h4>  
             }
         })()}
     </div>
