@@ -1,0 +1,144 @@
+.back-nav-btn {
+    color: var(--default-black);
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+}
+#single-habit-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: var(--default-radius);
+}
+#single-habit-page h1 {
+    font-size: 2em;
+}
+#single-habit-page > * {
+    width: 750px;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+/* Summary */
+.habit-summary {
+    position: relative;
+    color: rgb(255, 255, 255);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.options-modal {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    display: flex;
+    flex-direction: column;
+}
+.options-modal button {
+    background: var(--default-border-color);
+    padding-left: 20px;
+    padding-right: 20px;
+    color: var(--default-black);
+    font-family: "satoshi variable"
+}
+.options-modal button:nth-child(1) {
+    border-bottom: 1px solid black;
+}
+
+.summary-header {
+    display: flex;
+    justify-content: space-between;
+}
+.habit-option-btn {
+    background: none;
+    color: white;
+}
+.habit-summary > * {
+    margin-top: 15px;
+}
+.timer-toolbar {
+    background: rgba(0, 0, 0, 0.07);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+.timer-toolbar button {
+    background: none;
+    color: rgba(255, 255, 255, 0.559);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+}
+.timer-toolbar button.active {
+    background: rgba(255, 255, 255, 0.175);
+    transition: .2s;
+    color: white;
+    font-weight: 500;
+}
+.habit-summary p {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.457);
+}
+.habit-summary .timer h4 {
+    font-size: 1.5em;
+}
+.habit-summary h5 {
+    color: rgba(255, 255, 255, 0.457);
+    font-weight: 100;
+}
+
+/* Buttons */
+.habit-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid var(--default-border-color)
+}
+.habit-buttons button {
+    width: 220px;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1em;
+}
+.pause-btn {
+    background: #e63947f3;
+}
+.reset-btn {
+    background: var(--default-blue);
+}
+.complete-btn {
+    background: var(--default-green);
+}
+
+/* Stats*/
+.habit-stats {
+    border-left: 1px solid var(--default-border-color);
+    border-right: 1px solid var(--default-border-color);
+    border-bottom: 1px solid var(--default-border-color);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.stats-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 40px;
+}
+.stats-container p {
+    font-size: 1.5em;
+}
+.stats-container > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
