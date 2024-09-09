@@ -36,23 +36,13 @@ export default function Home() {
 
 
   const handleCreateHabit = async (name, startDate, color) => {
-    const temporaryHabit = {
-      name,
-      startDate,
-      color,
-      id: "temporary"
-    }
     setAllHabits(prev => [...prev, temporaryHabit])
     try {
       const response = await createHabit(name, startDate, color)
       const createdHabit = response.data
       navigate(`/habit/${response.data.id}`)
-      setAllHabits(prev => prev.map(habit => 
-        habit.id === temporaryHabit.id ? createdHabit : habit
-      ))
-      console.log(response)
+      setAllHabits(prev => [...prev, createHabit])
     } catch (error) {
-      setAllHabits(prev => prev.filter(habit => habit.id !== temporaryHabit.id))
       console.log(error)
     }
   }
