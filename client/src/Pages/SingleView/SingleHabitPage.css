@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: var(--default-radius);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.285);
 }
 #single-habit-page h1 {
     font-size: 2em;
@@ -34,7 +34,7 @@
     flex-direction: column;
 }
 .options-modal button {
-    background: var(--default-border-color);
+    background: var(--default-white);
     padding-left: 20px;
     padding-right: 20px;
     color: var(--default-black);
@@ -76,12 +76,16 @@
     color: white;
     font-weight: 500;
 }
+.habit-summary h1 {
+    font-weight: 600;
+}
 .habit-summary p {
     font-style: italic;
     color: rgba(255, 255, 255, 0.457);
 }
 .habit-summary .timer h4 {
-    font-size: 1.5em;
+    font-size: 1.75em;
+    font-weight: 500;
 }
 .habit-summary h5 {
     color: rgba(255, 255, 255, 0.457);
@@ -91,8 +95,10 @@
 /* Buttons */
 .habit-buttons {
     display: flex;
-    justify-content: space-evenly;
-    border: 1px solid var(--default-border-color)
+    justify-content: space-between;
+    border-bottom: .5px solid var(--default-inactive);
+    background: var(--default-foreground);
+
 }
 .habit-buttons button {
     width: 220px;
@@ -103,24 +109,39 @@
     justify-content: center;
     gap: 10px;
     font-size: 1em;
+    transition: .1s;
+}
+.habit-buttons button:hover {
+    filter: brightness(.8);
+    scale: .98
 }
 .pause-btn {
-    background: #e63947f3;
+    background: none;
+    border: 2px solid #ff0015f3;
+    color:  #ff0015f3;
+}
+.paused-pause-btn {
+    background: #ff00152d;
+    color: white;
+    border: 2px solid #ff0015f3;
 }
 .reset-btn {
-    background: var(--default-blue);
+    background: none;
+    border: 2px solid var(--default-blue);
+    color: var(--default-blue)
 }
 .complete-btn {
-    background: var(--default-green);
+    background: none;
+    border: 2px solid var(--default-green);
+    color: var(--default-green);
 }
 
 /* Stats*/
 .habit-stats {
-    border-left: 1px solid var(--default-border-color);
-    border-right: 1px solid var(--default-border-color);
-    border-bottom: 1px solid var(--default-border-color);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+    color: var(--default-white);
+    background: var(--default-foreground);
 }
 .stats-header {
     display: flex;
@@ -133,6 +154,7 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     gap: 40px;
+    padding: 25px;
 }
 .stats-container p {
     font-size: 1.5em;
@@ -141,4 +163,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+@media (max-width: 800px) {
+    #single-habit-page > * {
+        width: 100vw;
+    }
+    #single-habit-page h1 {
+        font-size: 7vw;
+    }
+    .habit-summary {
+        border-radius: 0px;
+    }
+
 }

@@ -1,0 +1,92 @@
+.login-form, .register-form {
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border: 2px solid var(--default-border-color);
+    gap: 10px;
+    margin-top: 50px;
+    width: 300px;
+}
+.login-form h1, .register-form h1 {
+    text-align: center;
+    margin: 15px;
+}
+.login-form button, .register-form button {
+    background: var(--default-blue)
+}
+
+
+/* Habit Form */
+.form-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.533);
+    top: 0;
+    left: 0;
+    z-index: 9000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.habit-form {
+    background: var(--default-background);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.563);
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 30px;
+    gap: 10px;
+    width: 400px;
+    z-index: 9000;
+}
+.habit-form input {
+    background: vaR(--default-foreground);
+    color: var(--default-white);
+}
+.habit-form label {
+    color: var(--default-inactive)
+}
+.color-selector {
+    display: flex;
+    gap: 10px;
+}
+.color-selector-btn {
+    border-radius: 50%;
+    height: 2em;
+    width: 2em;
+}
+.color-selector-btn.red {
+    background: var(--default-red)
+}
+.color-selector-btn.blue {
+    background: var(--default-blue);
+}
+.color-selector-btn.purple {
+    background: var(--default-purple);
+}
+.color-selector-btn.green {
+    background: var(--default-green);
+}
+.color-selector-btn.orange {
+    background: var(--default-orange);
+}
+.color-selector-btn#selected {
+    border: 3px solid white;
+}
+
+
+
+
+
+input {
+    border-radius: 5px;
+    border: 1px solid var(--default-border-color);
+    outline: none;
+    font-family: "satoshi variable";
+    padding: 5px;
+}
+input:focus {
+    border: 1px solid black;
+}
