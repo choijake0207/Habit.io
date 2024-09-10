@@ -42,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BIGINT,
             allowNull: false,
             defaultValue: 0
+        },
+        goals: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: []
         }
     })
     Habit.associate = (models) => {
