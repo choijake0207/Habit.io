@@ -7,12 +7,18 @@ import HabitStats from '../../Components/SingleComponents/HabitStats'
 import HabitSummary from '../../Components/SingleComponents/HabitSummary'
 import HabitButtons from '../../Components/SingleComponents/HabitButtons'
 import { resetHabit as resetAPI, pauseHabit as pauseAPI, deleteHabit as deleteAPI } from '../../API/HabitAPI'
+import Alert from "../../Components/Alerts/Alert"
  
 export default function SingleHabitPage() {
   const {id} = useParams()
   const [habit, setHabit] = useState()
   const [loading, setLoading] = useState(true)
+  const [alert, setAlert] = useState(null)
   const navigate = useNavigate()
+
+  const showAlert = (message, type) => {
+    setAlert({message, type})
+  }
 
   useEffect(() => {
     const fetchHabit = async () => {
@@ -33,7 +39,7 @@ export default function SingleHabitPage() {
     try {
       const response = await resetAPI(id)
       setHabit(response.data.habit)
-      console.log(response.data.habit)
+      showAlert("Habit Reset", "success")
     } catch (error) {
       console.log(error)
     }
@@ -41,9 +47,14 @@ export default function SingleHabitPage() {
 
   const pauseHabit = async () => {
     try {
+      const currentStatus = habit.status
       const response = await pauseAPI(id)
       setHabit(response.data.habit)
-      console.log(response.data.habit)
+      if (currentStatus === "paused") {
+        showAlert("Habit Resumed", "success")
+      } else {
+        showAlert("Habit Paused", "success")
+      }
     } catch (error) {
       console.log(error)
     }
@@ -61,6 +72,7 @@ export default function SingleHabitPage() {
 
   return (
     <PrivatePageWrap type={"single"}>
+      {alert && <Alert message={alert.message} type={alert.type} onClose={() => setAlert(null)}/>}
       {!loading && <div className="page" id="single-habit-page">
         <HabitSummary habit={habit} handleDelete={handleDelete}/>
         <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit}/>
