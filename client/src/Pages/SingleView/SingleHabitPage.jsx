@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react'
 import {fetchSingleHabit} from "../../API/HabitAPI"
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./SingleHabitPage.css"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import HabitStats from '../../Components/SingleComponents/HabitStats'
 import HabitSummary from '../../Components/SingleComponents/HabitSummary'
 import HabitButtons from '../../Components/SingleComponents/HabitButtons'
-import { resetHabit as resetAPI, pauseHabit as pauseAPI } from '../../API/HabitAPI'
-
+import { resetHabit as resetAPI, pauseHabit as pauseAPI, deleteHabit as deleteAPI } from '../../API/HabitAPI'
+ 
 export default function SingleHabitPage() {
   const {id} = useParams()
   const [habit, setHabit] = useState()
   const [loading, setLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchHabit = async () => {
@@ -48,10 +49,20 @@ export default function SingleHabitPage() {
     }
   }
 
+  const handleDelete = async () => {
+    try {
+      const response = await deleteAPI(id)
+      console.log(response)
+      navigate("/home")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <PrivatePageWrap type={"single"}>
       {!loading && <div className="page" id="single-habit-page">
-        <HabitSummary habit={habit}/>
+        <HabitSummary habit={habit} handleDelete={handleDelete}/>
         <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit}/>
         <HabitStats habit={habit}/>
       
