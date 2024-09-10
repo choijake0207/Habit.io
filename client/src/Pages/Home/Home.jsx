@@ -8,6 +8,8 @@ import HabitCard from '../../Components/Habit/HabitCard'
 import { AuthContext } from '../../Context/AuthContext'
 import { createHabit } from '../../API/HabitAPI'
 import { useNavigate } from 'react-router-dom'
+import Loader from '../../Components/Loader/Loader'
+import Alert from "../../Components/Alerts/Alert"
 
 export default function Home() {
 
@@ -17,6 +19,7 @@ export default function Home() {
   const navigate = useNavigate()
   const [filter, setFilter] = useState("newest")
   const [sort, setSort] = useState("all")
+  const [alert, setAlert] = useState(null)
 
   useEffect(() => {
     const fetchHabits = async () => {
@@ -36,22 +39,21 @@ export default function Home() {
 
 
   const handleCreateHabit = async (name, startDate, color) => {
-    setAllHabits(prev => [...prev, temporaryHabit])
     try {
       const response = await createHabit(name, startDate, color)
       const createdHabit = response.data
       navigate(`/habit/${response.data.id}`)
-      setAllHabits(prev => [...prev, createHabit])
+      setAllHabits(prev => [...prev, createdHabit])
     } catch (error) {
       console.log(error)
     }
   }
 
   return (
-    <PrivatePageWrap type="Home">
+    <PrivatePageWrap type="Your Habits">
+      {alert && <Alert message={alert.message} type={alert.type} onClose={()=> setAlert(null)}/>}
       <div className="page" id="home-page">
         <div className="habit-toolbar">
-          <h2>Your Habits</h2>
           <div className="sort-and-filter">
             <div className="sort">
               <SquaresFour/>
