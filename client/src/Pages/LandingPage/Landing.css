@@ -2,6 +2,7 @@
     overflow-y: scroll;
     height: 100vh;
     scroll-snap-type: y mandatory;
+    background: var(--default-background);
 }
 
 
@@ -11,12 +12,13 @@
     scroll-snap-align: center;
     box-sizing: border-box;
     padding: 100px;
-    border: 1px dashed grey;
+    border-bottom: 2px solid var(--default-border-color);
 }
 /*                  Quote.jsx              */
 .prim-quote {
     font-size: 4em;
     font-weight: 500;
+    color: var(--default-white);
 }
 .hl-green {
     color: forestgreen;
@@ -30,11 +32,13 @@
     font-weight: 700;
     border-bottom: 3px solid black;
 }
-/*                  Statement.jsx              */
+ /* Statement.jsx */
 .landing-statement {
-    background: linear-gradient(to bottom, white, rgb(187, 187, 187));
+    background: linear-gradient(to bottom, var(--default-background), var(--default-foreground));
 }
-/*                  Walk.jsx              */
 .landing-walk-through {
-    background: linear-gradient(to bottom, rgb(188, 188, 188), rgb(169, 169, 169))
+    background: linear-gradient(to bottom, var(--default-foreground), rgb(44, 46, 49))
+}
+.landing-contact {
+    background: linear-gradient(to bottom, rgb(44, 46,49), rgb(49, 52, 55))
 }
