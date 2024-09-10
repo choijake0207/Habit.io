@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pause, ArrowCounterClockwise, Target, Play } from 'phosphor-react'
 
-export default function HabitButtons({onReset, habit, onPause}) {
+export default function HabitButtons({onReset, habit, onPause, toggleFormVisibility}) {
   return (
     <section className="habit-buttons">
         <button className={habit.status === "paused" ? "paused-pause-btn" : "pause-btn"} onClick={onPause}>
@@ -12,7 +12,7 @@ export default function HabitButtons({onReset, habit, onPause}) {
             <ArrowCounterClockwise/>
             Reset
         </button>
-        <button className="goal-btn">
+        <button className="goal-btn" onClick={toggleFormVisibility}>
             <Target/>
             Create Goal
         </button>
