@@ -8,6 +8,7 @@ import HabitSummary from '../../Components/SingleComponents/HabitSummary'
 import HabitButtons from '../../Components/SingleComponents/HabitButtons'
 import { resetHabit as resetAPI, pauseHabit as pauseAPI, deleteHabit as deleteAPI } from '../../API/HabitAPI'
 import Alert from "../../Components/Alerts/Alert"
+import GoalForm from '../../Components/Forms/GoalForm'
  
 export default function SingleHabitPage() {
   const {id} = useParams()
@@ -15,6 +16,7 @@ export default function SingleHabitPage() {
   const [loading, setLoading] = useState(true)
   const [alert, setAlert] = useState(null)
   const navigate = useNavigate()
+  const [formVisibility, setFormVisibility] = useState(false)
 
   const showAlert = (message, type) => {
     setAlert({message, type})
@@ -73,9 +75,10 @@ export default function SingleHabitPage() {
   return (
     <PrivatePageWrap type={"single"}>
       {alert && <Alert message={alert.message} type={alert.type} onClose={() => setAlert(null)}/>}
+      {formVisibility && <GoalForm/>}
       {!loading && <div className="page" id="single-habit-page">
         <HabitSummary habit={habit} handleDelete={handleDelete}/>
-        <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit}/>
+        <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit} toggleFormVisibility={() => setFormVisibility(true)}/>
         <HabitStats habit={habit}/>
       
       </div>}
