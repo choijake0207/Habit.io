@@ -1,24 +1,29 @@
 import React, {useState} from 'react'
 import Timer from "../Timer/Timer"
 import {DotsThreeCircle} from "phosphor-react"
+import { useParams } from 'react-router-dom'
 
 
-export default function HabitSummary({habit}) {
+export default function HabitSummary({habit, handleDelete}) {
   const [time, date] =habit.creationDate.split("-")
   const [timeSetting, setTimeSetting] = useState("Hours")
   const timeSettings = ["Hours", "Days", "Weeks", "Months", "Years"]
   const [modalOn, setModalOn] = useState(false)
-  console.log(timeSetting)
+  const {id} = useParams()
+
+
+  
+
   return (
     <section className={`habit-summary ${habit.color}`}>
-        {modalOn && <OptionsModal/>}
+        {modalOn && <OptionsModal deleteHabit={handleDelete}/>}
         <header className="summary-header">
           <h1>{habit.name}</h1>
           <button className="habit-option-btn" onClick={() => setModalOn(!modalOn)}>
             <DotsThreeCircle size={"2em"}/>
           </button>
         </header>
-        <h3>Current Streak</h3>
+
         <div className="timer-toolbar">
           {timeSettings.map(type => {
             return (
@@ -32,6 +37,7 @@ export default function HabitSummary({habit}) {
             )
           })}
         </div>
+        <p>Current Streak:</p>
         <Timer
             start={habit.startDate}
             type={timeSetting}
@@ -39,16 +45,16 @@ export default function HabitSummary({habit}) {
             pauseDuration={habit.pauseDuration}
             pauseDate={habit.pauseDate}
         />
-        <p>Started on {date}</p>
+        <h5>Started on {date}</h5>
     </section>
   )
 }
 
-export function OptionsModal()  {
+export function OptionsModal({deleteHabit})  {
   return (
     <div className="options-modal">
       <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={deleteHabit}>Delete</button>
     </div>  
   )
 }
