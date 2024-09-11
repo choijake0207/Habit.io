@@ -1,0 +1,22 @@
+.progress-tracker {
+    margin-top: 5px;
+    display: flex;
+    gap: 10px;
+
+
+    border: 2px solid var(--default-border-color)
+}
+.goal-width {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.101);
+    height: 7px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+}
+.goal-progress {
+    background: var(--default-white);
+    width: 50%;
+    height: 5px;
+    border-radius: 50px;
+}
