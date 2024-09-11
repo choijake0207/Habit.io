@@ -58,8 +58,12 @@ router.get("/:id", validateToken, async (req, res) => {
 router.delete("/delete/:id", validateToken, async (req, res) => {
     try {
         const habitId = req.params.id
+        const userId = req.user.id
         const habitToDelete = await Habit.findOne({
-            where: {id: habitId}
+            where: {
+                userId: userId, 
+                id: habitId
+            }
         })
         await Habit.destroy({
             where: {id: habitToDelete.id}
@@ -146,5 +150,34 @@ router.put("/pause/:id", validateToken, async (req, res) => {
         res.status(500).json({error: "Failed To Pause/Resume Habit"})
     }
 })
+
+// create goal
+router.post(":id/goal", validateToken, async (req, res) => {
+    const habitId = req.params.id
+    const userId = req.user.id
+    const {type, value} = req.body
+    try {
+        const habit = await Habit.findOne({
+            where: {
+                id: habitId,
+                userId: userId
+            }
+        })
+        if (!habit) {
+            return res.status(404).json({error: "Habit Can Not Be Found"})
+        }
+        const newGoal = {
+            type,
+            target: value,
+            completed: false
+        }
+        const updatedGoals = [...habit.goals, newGoal]
+        habit.goals = updatedGoals
+        await habit.save()
+    } catch (error) {
+        res.status(500).json({error: "Failed To Create Goal"})
+    }
+})
+
 
 module.exports = router
