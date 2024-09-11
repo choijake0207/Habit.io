@@ -84,8 +84,40 @@
     border: 3px solid white;
 }
 
+/* goal Form */
+.goal-form {
+    background: var(--default-background);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 15px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.563);
+    width: 400px;
+}
+.goal-form h1{
+    color: white;
+}
+.goal-option-bar button {
+    background: var(--default-background);
+    border: 2px solid var(--default-border-color);
+}
 
 
+.pop-up {
+    animation: pop-up .1s ease-in-out forwards
+}
+
+@keyframes pop-up {
+    0% {
+        transform: translateY(100%)
+    }
+    100% {
+        transform: translateY(0%)
+    }
+}
 
 
 input {
@@ -97,4 +129,7 @@ input {
 }
 input:focus {
     border: 1px solid var(--default-white);
+}
+label {
+    color: var(--defaut-inactive);
 }
