@@ -23,6 +23,16 @@ export default function HabitStats({habit}) {
 
         return `${days}d ${hours}h ${minutes}m`
     }
+    const findSinceCreation = (creationDate) => {
+        const [time, date] = creationDate.split("-")
+        const creation = new Date(`${date} ${time}`)
+        const now = new Date()
+        const lapse = now - creation
+        return lapse
+    }
+    const sinceCreation = findSinceCreation(habit.creationDate)
+
+
 
 
   return (
@@ -37,8 +47,8 @@ export default function HabitStats({habit}) {
             <label>Resets</label>
         </div>
         <div className="total-lapse">
-            <p>0</p>
-            <label>Since Start</label>
+            <p>{streakFormatter(sinceCreation)}</p>
+            <label>Since Creation</label>
         </div>
         <div className="longest-streak">
             <p>{streakFormatter(longestStreak)}</p>
