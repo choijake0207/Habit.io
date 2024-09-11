@@ -75,6 +75,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        {loading && <Loader/>}
         {!loading && allHabits.length > 0 ? (
           <ul className="habit-container">
             {allHabits.map(habit => {
