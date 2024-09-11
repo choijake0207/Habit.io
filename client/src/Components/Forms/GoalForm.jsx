@@ -1,13 +1,26 @@
 import React, {useState} from 'react'
 
-export default function GoalForm({onClose, status}) {
+export default function GoalForm({onClose, status, createGoal}) {
 
     const [goalOption, setGoalOption] = useState("date")
-    const [durationOption, setDurationOption] = useState(null)
-    console.log(durationOption)
+    const [goalDate, setGoalDate] = useState("")
+    const [durationUnit, setDurationUnit] = useState(null)
+    const [goalDuration, setGoalDuration] = useState(null)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let goal = {}
+        if (goalOption === "date") {
+            goal = {type: "date", value: goalDate}
+        } else  {
+            goal = {type: "duration", value: {length: goalDuration, unit: durationUnit }}
+        }
+        createGoal()
+        onClose()
+    }
   return (
     <div className="form-overlay">
-        <form className={status ? "pop-up goal-form": "goal-form"}> 
+        <form className={status ? "pop-up goal-form": "goal-form"} onSubmit={handleSubmit}> 
             <div className="goal-option-bar">
                 <label>Choose Goal Type:</label>
                 <div className="option-bar-btn">
@@ -22,13 +35,22 @@ export default function GoalForm({onClose, status}) {
                     <input
                         type="date"
                         required
+                        value={goalDate}
+                        onChange={(e) => setGoalDate(e.target.value)}
                     />
                 </div>
                 : <div className="goal goal-duration">
                     <label>Choose a Duration:</label>
                     <div className="duration-container">
-                        <input required type="number" step="1" min="1"/>
-                        <select required value={durationOption} onChange={(e) => setDurationOption(e.target.value)}>
+                        <input 
+                            required 
+                            type="number" 
+                            step="1" 
+                            min="1"
+                            value={goalDuration}
+                            onChange={(e) => setGoalDuration(e.target.value)}
+                        />
+                        <select required value={durationUnit} onChange={(e) => setDurationUnit(e.target.value)}>
                             <option value="Hours">Hours</option>
                             <option value="Days">Days</option>
                             <option value="Weeks">Weeks</option>
