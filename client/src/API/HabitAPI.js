@@ -57,8 +57,8 @@ export const pauseHabit = async (id) => {
     return response
 }
 
-export const createGoal = async (id) => {
-    const response = await axios.post(`http://localhost:3001/habit/${id}/goal`, {
+export const createGoal = async (id, goal) => {
+    const response = await axios.post(`http://localhost:3001/habit/goal/${id}`, {
         goal
     },  {
         headers: {
