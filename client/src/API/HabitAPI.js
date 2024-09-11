@@ -56,3 +56,14 @@ export const pauseHabit = async (id) => {
     })
     return response
 }
+
+export const createGoal = async (id) => {
+    const response = await axios.post(`http://localhost:3001/habit/${id}/goal`, {
+        goal
+    },  {
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }
+    })
+    return response
+}
