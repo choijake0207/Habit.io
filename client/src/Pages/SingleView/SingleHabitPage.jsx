@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import HabitStats from '../../Components/SingleComponents/HabitStats'
 import HabitSummary from '../../Components/SingleComponents/HabitSummary'
 import HabitButtons from '../../Components/SingleComponents/HabitButtons'
-import { resetHabit as resetAPI, pauseHabit as pauseAPI, deleteHabit as deleteAPI, createGoal as createGoalAPI } from '../../API/HabitAPI'
+import { resetHabit as resetAPI, pauseHabit as pauseAPI, deleteHabit as deleteAPI, createGoal as createGoalAPI, updateGoal as updateGoalAPI } from '../../API/HabitAPI'
 import Alert from "../../Components/Alerts/Alert"
 import GoalForm from '../../Components/Forms/GoalForm'
 
@@ -81,13 +81,24 @@ export default function SingleHabitPage() {
       console.log(error)
     }
   }
+
+  const cancelGoal = async () => {
+    try {
+      const response = await updateGoalAPI(id, "cancel")
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   return (
     <PrivatePageWrap type={"single"}>
       {alert && <Alert message={alert.message} type={alert.type} action={alert.action} onClose={() => setAlert(null)}/>}
       {formVisibility && <GoalForm onClose={()=> setFormVisibility(false)} status={formVisibility}  createGoal={handleCreateGoal}/>}
       {!loading && <div className="page" id="single-habit-page">
         <HabitSummary habit={habit} handleDelete={handleDelete}/>
-        <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit} toggleFormVisibility={() => setFormVisibility(true)}/>
+        <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit} toggleFormVisibility={() => setFormVisibility(true)} onCancel={cancelGoal}/>
         <HabitStats habit={habit}/>
       
       </div>}
