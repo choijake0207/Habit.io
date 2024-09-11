@@ -183,5 +183,40 @@ router.post("/goal/:id", validateToken, async (req, res) => {
     }
 })
 
+// update goal : cancel or complete //
+router.put("/goal/:action/:id", validateToken, async (req, res) => {
+    const habitId = req.params.id
+    const userId = req.user.id
+    const action = req.params.action
+    try {
+        const habit = await Habit.findOne({
+            where: {
+                id: habitId,
+                userId: userId
+            }
+        })
+        if (!habit) {return res.status(404).json({error: "Habit Can Not Be Found"})}
+        if (!habit.currentGoal) {return res.status(404).json({error: "No Active Goals At This Time"})}
+        switch (action) {
+            case "cancel":
+                habit.currentGoal = null
+                await habit.save()
+                return res.json({message: "Goal Cancelled", habit: habit})
+            case "complete":
+                const completedGoal = {
+                    ...habit.currentGoal,
+                    completed: true,
+                    completionDate: new Date()
+                }
+                habit.goals = [...habit.goals, completedGoal]
+                habit.currentGoal = null
+                await habit.save()
+                return res.json({message: "Goal Completed", habit: habit})
+        }
+    } catch (error) {
+        res.status(500).json({error: "Failed To Updated Goal"})
+    }
+})
+
 
 module.exports = router
