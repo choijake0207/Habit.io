@@ -30,10 +30,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: "ongoing"
         },
-        goalDuration: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
         color: {
             type: DataTypes.STRING,
             allowNull: true,
