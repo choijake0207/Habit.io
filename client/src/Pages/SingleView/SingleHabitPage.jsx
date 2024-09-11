@@ -78,6 +78,7 @@ export default function SingleHabitPage() {
       const response = await createGoalAPI(id, goal)
       console.log(response.data)
       setHabit(response.data.habit)
+      showAlert("Goal Created", "success")
     } catch (error) {
       console.log(error)
     }
@@ -88,6 +89,7 @@ export default function SingleHabitPage() {
       const response = await updateGoalAPI(id, "cancel")
       console.log(response)
       setHabit(response.data.habit)
+      showAlert("Goal Cancelled", "success")
     } catch (error) {
       console.log(error)
     }
