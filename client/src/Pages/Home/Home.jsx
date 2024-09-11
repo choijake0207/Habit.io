@@ -105,6 +105,7 @@ export default function Home() {
         <HabitForm
           createHabit={handleCreateHabit}
           onClose={() => setFormVisible(false)}
+          status={formVisible}
         />
       }
     </PrivatePageWrap>

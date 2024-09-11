@@ -18,8 +18,8 @@ export default function SingleHabitPage() {
   const navigate = useNavigate()
   const [formVisibility, setFormVisibility] = useState(false)
 
-  const showAlert = (message, type) => {
-    setAlert({message, type})
+  const showAlert = (message, type, action) => {
+    setAlert({message, type, action})
   }
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function SingleHabitPage() {
     try {
       const response = await resetAPI(id)
       setHabit(response.data.habit)
-      showAlert("Habit Reset", "success")
+      showAlert("Habit Reset", "success", "reset")
     } catch (error) {
       console.log(error)
     }
@@ -53,9 +53,9 @@ export default function SingleHabitPage() {
       const response = await pauseAPI(id)
       setHabit(response.data.habit)
       if (currentStatus === "paused") {
-        showAlert("Habit Resumed", "success")
+        showAlert("Habit Resumed", "success", "resume")
       } else {
-        showAlert("Habit Paused", "success")
+        showAlert("Habit Paused", "success", "pause")
       }
     } catch (error) {
       console.log(error)
@@ -74,8 +74,8 @@ export default function SingleHabitPage() {
 
   return (
     <PrivatePageWrap type={"single"}>
-      {alert && <Alert message={alert.message} type={alert.type} onClose={() => setAlert(null)}/>}
-      {formVisibility && <GoalForm/>}
+      {alert && <Alert message={alert.message} type={alert.type} action={alert.action} onClose={() => setAlert(null)}/>}
+      {formVisibility && <GoalForm onClose={()=> setFormVisibility(false)} status={formVisibility}/>}
       {!loading && <div className="page" id="single-habit-page">
         <HabitSummary habit={habit} handleDelete={handleDelete}/>
         <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit} toggleFormVisibility={() => setFormVisibility(true)}/>
