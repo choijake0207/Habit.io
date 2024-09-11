@@ -172,8 +172,7 @@ router.post("/goal/:id", validateToken, async (req, res) => {
             target: goal.value,
             completed: false
         }
-        const updatedGoals = [...habit.goals, newGoal]
-        habit.goals = updatedGoals
+        habit.currentGoal = newGoal
         await habit.save()
         res.json({
             message: "Goal Created Succesfully",
