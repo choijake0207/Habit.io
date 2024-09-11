@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 
-export default function GoalForm({onClose}) {
+export default function GoalForm({onClose, status}) {
 
     const [goalOption, setGoalOption] = useState("date")
 
   return (
     <div className="form-overlay">
-        <form className="goal-form">
+        <form className={status ? "pop-up goal-form": "goal-form"}>
             <h1>Create A Goal</h1>
             <div className="goal-option-bar">
                 <button type="button" onClick={() => setGoalOption("date")}>Choose A Date</button>

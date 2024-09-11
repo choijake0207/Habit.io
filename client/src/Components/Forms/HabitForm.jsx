@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import "./Form.css"
 import HabitCard from "../Habit/HabitCard"
 
-export default function HabitForm({ createHabit, onClose}) {
+export default function HabitForm({ createHabit, onClose, status}) {
     const colors = ["red", "blue", "green", "orange", "purple"]
     const randomColor = colors[Math.floor(Math.random() * colors.length)]
     const [name, setName] = useState("")
@@ -17,8 +17,8 @@ export default function HabitForm({ createHabit, onClose}) {
     }
   return (
     <div className="form-overlay">
-        <form className="habit-form" onSubmit={handleSubmit}>
-            <HabitCard forDisplay={true} color={color}/>
+        <form className={status ? "pop-up habit-form" : "habit-form"} onSubmit={handleSubmit}>
+            <HabitCard forDisplay={true} color={color} inputName={name}/>
             <input
                 type="text"
                 value={name}
