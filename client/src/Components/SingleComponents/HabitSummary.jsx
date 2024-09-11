@@ -2,10 +2,12 @@ import React, {useState} from 'react'
 import Timer from "../Timer/Timer"
 import {DotsThreeCircle} from "phosphor-react"
 import { useParams } from 'react-router-dom'
+import Progress from '../Progress/Progress'
+
 
 
 export default function HabitSummary({habit, handleDelete}) {
-  const [time, date] =habit.creationDate.split("-")
+  const [sTime, sDate] = habit.startDate.split("-")
   const [timeSetting, setTimeSetting] = useState("Hours")
   const timeSettings = ["Hours", "Days", "Weeks", "Months", "Years"]
   const [modalOn, setModalOn] = useState(false)
@@ -45,7 +47,8 @@ export default function HabitSummary({habit, handleDelete}) {
             pauseDuration={habit.pauseDuration}
             pauseDate={habit.pauseDate}
         />
-        <h5>Started on {date}</h5>
+        <p>Streak started on {sDate}</p>
+        {habit.currentGoal && <Progress goal={habit.currentGoal}/>}
     </section>
   )
 }
