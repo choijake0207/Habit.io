@@ -152,10 +152,11 @@ router.put("/pause/:id", validateToken, async (req, res) => {
 })
 
 // create goal
-router.post(":id/goal", validateToken, async (req, res) => {
+router.post("/goal/:id", validateToken, async (req, res) => {
     const habitId = req.params.id
     const userId = req.user.id
-    const {type, value} = req.body
+    const {goal} = req.body
+  
     try {
         const habit = await Habit.findOne({
             where: {
@@ -167,13 +168,17 @@ router.post(":id/goal", validateToken, async (req, res) => {
             return res.status(404).json({error: "Habit Can Not Be Found"})
         }
         const newGoal = {
-            type,
-            target: value,
+            type: goal.type,
+            target: goal.value,
             completed: false
         }
         const updatedGoals = [...habit.goals, newGoal]
         habit.goals = updatedGoals
         await habit.save()
+        res.json({
+            message: "Goal Created Succesfully",
+            goal: newGoal
+        })
     } catch (error) {
         res.status(500).json({error: "Failed To Create Goal"})
     }
