@@ -4,8 +4,8 @@ export default function GoalForm({onClose, status, createGoal}) {
 
     const [goalOption, setGoalOption] = useState("date")
     const [goalDate, setGoalDate] = useState("")
-    const [durationUnit, setDurationUnit] = useState(null)
-    const [goalDuration, setGoalDuration] = useState(null)
+    const [durationUnit, setDurationUnit] = useState("Days")
+    const [goalDuration, setGoalDuration] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -15,7 +15,7 @@ export default function GoalForm({onClose, status, createGoal}) {
         } else  {
             goal = {type: "duration", value: {length: goalDuration, unit: durationUnit }}
         }
-        createGoal()
+        createGoal(goal)
         onClose()
     }
   return (
