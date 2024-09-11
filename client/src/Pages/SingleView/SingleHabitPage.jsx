@@ -77,6 +77,7 @@ export default function SingleHabitPage() {
     try {
       const response = await createGoalAPI(id, goal)
       console.log(response.data)
+      setHabit(response.data.habit)
     } catch (error) {
       console.log(error)
     }
@@ -86,6 +87,7 @@ export default function SingleHabitPage() {
     try {
       const response = await updateGoalAPI(id, "cancel")
       console.log(response)
+      setHabit(response.data.habit)
     } catch (error) {
       console.log(error)
     }
