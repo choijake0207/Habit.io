@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
+        currentGoal: {
+            type: DataTypes.JSON,
+            allowNull: true,
+        },
         goals: {
             type: DataTypes.JSON,
             allowNull: false,
