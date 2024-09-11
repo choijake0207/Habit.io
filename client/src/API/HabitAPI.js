@@ -67,3 +67,13 @@ export const createGoal = async (id, goal) => {
     })
     return response
 }
+
+export const updateGoal = async (id) => {
+    const response = await axios.put(`http://localhost:3001/habit/goal/${id}`, {}, {
+        headers: {
+            accessToken: localStorage.getItem("accessToken")
+        }
+    })
+    return response
+
+}
