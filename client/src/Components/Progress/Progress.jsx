@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import "./Progress.css"
 
-export default function Progress({goal}) {
 
+
+export default function Progress({goal, type, habit}) {
   const [progress, setProgress] = useState(0)
+
+  const convertHabitToISO = (habitStart) => {
+    const [time, date] = habitStart.split("-")
+    const [month, day, year] = date.split("/")
+    const formattedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    const parsedTime = new Date(`${formattedDate} ${time}`).toISOString();
+    return parsedTime
+  }
+
   useEffect(() => {
     const calculateProgress = () => {
       const now = new Date()
       let percentage = 0
+      const habitStart = convertHabitToISO(habit.startDate)
+      let start = goal.countStreak ? habitStart : goal.start
       if (goal.type === "date") {
         const targetDate = new Date(goal.target)
-        const totalDuration = targetDate - new Date(goal.start)
-        const passedDuration = now - new Date(goal.start)
+        const totalDuration = targetDate - new Date(start)
+        const passedDuration = now - new Date(start)
+        console.log(passedDuration)
         percentage = (passedDuration / totalDuration ) * 100
       } else if (goal.type === "duration") {
         const {length, unit} = goal.target
@@ -23,7 +36,9 @@ export default function Progress({goal}) {
           Years: 1000 * 60 * 60 * 24 * 365,
         }
         const totalDuration = length * unitToms[unit]
-        const passedDuration = now - new Date(goal.start)
+        console.log(totalDuration)
+        const passedDuration = now - new Date(start)
+        console.log(passedDuration)
         percentage = (passedDuration / totalDuration) * 100
       }
       setProgress(Math.min(100, percentage))
@@ -33,14 +48,14 @@ export default function Progress({goal}) {
     return () => clearInterval(interval)
   }, [goal])
 
-  console.log(progress)
+
+  const roundedProgress = Math.round(progress)
   return (
-    <div className="progress-tracker">
-      <p>Goal Progress:</p>
+    <div className={type === "card" ? "card progress-tracker" : "progress-tracker"}>
       <div className="goal-width">
         <div className="goal-progress" style={{width: `${progress}%`}}></div>
       </div>
- 
+      <p>Progress: {roundedProgress}%</p>
     </div>
   )
 }
