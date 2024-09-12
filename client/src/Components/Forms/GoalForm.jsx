@@ -5,7 +5,7 @@ export default function GoalForm({onClose, status, createGoal}) {
     const [goalOption, setGoalOption] = useState("date")
     const [goalDate, setGoalDate] = useState("")
     const [durationUnit, setDurationUnit] = useState("Days")
-    const [goalDuration, setGoalDuration] = useState("")
+    const [goalDuration, setGoalDuration] = useState(0)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -61,6 +61,15 @@ export default function GoalForm({onClose, status, createGoal}) {
                    
                 </div>
             }
+            <div className="optional-input">
+                <label>Count Existing Streak Time:</label>
+                <div className="custom-checkbox">
+                    <input
+                        type="checkbox"
+                    />
+                    <label></label>
+                </div> 
+            </div>
             <button type="submit" className="submit-btn">Create</button>
             <button type="button" className="cancel-btn" onClick={onClose}>Cancel</button>
         </form>
