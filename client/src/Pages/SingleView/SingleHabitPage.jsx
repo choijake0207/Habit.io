@@ -79,6 +79,10 @@ export default function SingleHabitPage() {
   }
 
   const handleCreateGoal = async (goal) => {
+    if (habit.status === "paused") {
+      showAlert("Error: Goal Can't Be Started While Streak Is Paused", "failure", null)
+      return
+    }
     if (processingReq)  {
       showAlert("Error: Please Try Again In A Few Moments", "failure", null)
       return
