@@ -50,7 +50,7 @@ export default function Progress({goal, type, habit}) {
       setProgress(calculateProgress())
     }, 1000)
     return (() => clearInterval(interval))
-  }, [])
+  }, [habit.startDate, goal])
 
 
   const roundedProgress = Math.round(progress)
