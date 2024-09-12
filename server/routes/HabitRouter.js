@@ -156,6 +156,7 @@ router.post("/goal/:id", validateToken, async (req, res) => {
     const habitId = req.params.id
     const userId = req.user.id
     const {goal} = req.body
+    const startDate = new Date()
   
     try {
         const habit = await Habit.findOne({
@@ -170,13 +171,15 @@ router.post("/goal/:id", validateToken, async (req, res) => {
         const newGoal = {
             type: goal.type,
             target: goal.value,
+            start: startDate,
             completed: false
         }
         habit.currentGoal = newGoal
         await habit.save()
         res.json({
-            message: "Goal Created Succesfully",
-            goal: newGoal
+            message: "Goal Created",
+            goal: newGoal,
+            habit: habit
         })
     } catch (error) {
         res.status(500).json({error: "Failed To Create Goal"})
