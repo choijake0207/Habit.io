@@ -9,6 +9,7 @@
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.285);
     white-space: wrap;
     overflow: hidden;
+    position: relative;
     
 }
 .habit-card:hover {
@@ -31,6 +32,23 @@
     font-weight: 500;
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.paused-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 150%;
+    background: rgba(0, 0, 0, 0.473);
+}
+.paused-screen svg {
+    color: white;
 }
 
 .red {
