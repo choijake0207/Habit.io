@@ -1,21 +1,30 @@
 .back-nav-btn {
-    color: var(--default-black);
-    font-size: 3em;
+    color: vaR(--default-white);
+    font-size: 1em;
     display: flex;
     align-items: center;
+    background: none;
+    gap: 10px;
+}
+.back-nav-btn svg {
+    height: 2em;
+    width: 2em;
 }
 #single-habit-page {
     display: flex;
+    position: relative;
     flex-direction: column;
-    align-items: center;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.285);
+}
+.single.private-page-wrap .single.page-header {
+    padding: 0;
+    padding-left: 25px;
 }
 #single-habit-page h1 {
     font-size: 2em;
 }
 #single-habit-page > * {
     width: 750px;
-    padding: 25px;
     box-sizing: border-box;
 }
 
@@ -25,6 +34,7 @@
     color: rgb(255, 255, 255);
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    padding: 25px;
 }
 .options-modal {
     position: absolute;
@@ -98,12 +108,12 @@
     justify-content: space-between;
     border-bottom: .5px solid var(--default-inactive);
     background: var(--default-foreground);
-
+    padding: 25px;
 }
 .habit-buttons button {
-    width: 220px;
+    width: 200px;
     border-radius: 5px;
-    padding: 15px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,34 +140,40 @@
     border: 2px solid var(--default-blue);
     color: var(--default-blue)
 }
-.complete-btn {
+.goal-btn {
     background: none;
     border: 2px solid var(--default-green);
     color: var(--default-green);
 }
-
+.end.goal-btn {
+    background: var(--default-green);
+    color: white;
+}
 /* Stats*/
 .habit-stats {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     color: var(--default-white);
     background: var(--default-foreground);
+    padding: 25px;
 }
 .stats-header {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 15px;
 }
 .stats-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 40px;
+    gap: 25px;
     padding: 25px;
 }
 .stats-container p {
     font-size: 1.5em;
+}
+.stats-container label {
+    color: var(--default-inactive);
 }
 .stats-container > * {
     display: flex;
@@ -174,6 +190,9 @@
     }
     .habit-summary {
         border-radius: 0px;
+    }
+    .timer-toolbar button {
+        font-size: 3vw;
     }
 
 }
