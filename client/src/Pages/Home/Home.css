@@ -8,7 +8,7 @@
 
 .habit-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-columns: repeat(auto-fill, 320px);
     grid-auto-rows: 200px;
     justify-content: flex-start;
     height: 100%;
@@ -57,9 +57,9 @@
     align-items: center;
     height: 500px;
     border-radius: var(--default-radius);
-    color: vaR(--default-border-color);
+    color: vaR(--default-inactive);
     margin: 25px;
-
+    border: 5px solid var(--default-border-color)
 }
 
 .add-habit-btn {
@@ -67,14 +67,18 @@
     bottom: 10%;
     right: 3%;
     border-radius: 50%;
-    background: var(--default-blue);
+    background: rgb(33, 80, 249);
     width: 5em;
     height: 5em;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.501);
     display: flex;
     justify-content: center;
     align-items: center;
-
+    transition: .1s ease-in
+}
+.add-habit-btn:hover {
+    scale: 1.05;
+    background: vaR(--default-blue);
 }
 
 
