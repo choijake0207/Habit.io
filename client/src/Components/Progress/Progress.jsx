@@ -46,11 +46,8 @@ export default function Progress({goal, type, habit}) {
 
   const [progress, setProgress] = useState(() => calculateProgress())
   useEffect(() => {
-    const updateProgress = () => {
-      setProgress(calculateProgress())
-    }
     const interval = setInterval(() => {
-      updateProgress
+      setProgress(calculateProgress())
     }, 1000)
     return (() => clearInterval(interval))
   }, [habit.startDate, goal])
