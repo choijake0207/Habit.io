@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, act } from 'react'
 import {fetchSingleHabit} from "../../API/HabitAPI"
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./SingleHabitPage.css"
@@ -18,6 +18,7 @@ export default function SingleHabitPage() {
   const [alert, setAlert] = useState(null)
   const navigate = useNavigate()
   const [formVisibility, setFormVisibility] = useState(false)
+  const [processingReq, setProcessingReq] = useState(true)
 
   const showAlert = (message, type, action) => {
     setAlert({message, type, action})
@@ -74,6 +75,10 @@ export default function SingleHabitPage() {
   }
 
   const handleCreateGoal = async (goal) => {
+    if (processingReq)  {
+      showAlert("Error: Please Try Again In A Few Moments", "failiure")
+      return
+    }
     try {
       const response = await createGoalAPI(id, goal)
       console.log(response.data)
@@ -85,6 +90,7 @@ export default function SingleHabitPage() {
   }
 
   const cancelGoal = async () => {
+    setProcessingReq(true)
     try {
       const response = await updateGoalAPI(id, "cancel")
       console.log(response)
@@ -92,6 +98,10 @@ export default function SingleHabitPage() {
       showAlert("Goal Cancelled", "success")
     } catch (error) {
       console.log(error)
+    } finally {
+      setTimeout(() => {
+        setProcessingReq(false)
+      }, 5000)
     }
   }
 
