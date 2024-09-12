@@ -168,6 +168,9 @@ router.post("/goal/:id", validateToken, async (req, res) => {
         if (!habit) {
             return res.status(404).json({error: "Habit Can Not Be Found"})
         }
+        if (habit.status === "paused") {
+            return res.status(400).json({error: "Goal Can Not Be Created While Streak Is Paused"})
+        }
         const newGoal = {
             type: goal.type,
             target: goal.value,
