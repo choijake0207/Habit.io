@@ -43,7 +43,11 @@ export default function SingleHabitPage() {
     try {
       const response = await resetAPI(id)
       setHabit(response.data.habit)
-      showAlert("Habit Reset", "success", "reset")
+      if (habit.currentGoal && habit.currentGoal.countStreak) {
+        showAlert("Habit and Goal Reset", "success", "reset")
+      } else {
+        showAlert("Habit Reset", "success", "reset")
+      }
     } catch (error) {
       console.log(error)
     }
@@ -76,7 +80,7 @@ export default function SingleHabitPage() {
 
   const handleCreateGoal = async (goal) => {
     if (processingReq)  {
-      showAlert("Error: Please Try Again In A Few Moments", "failiure")
+      showAlert("Error: Please Try Again In A Few Moments", "failure", null)
       return
     }
     try {
@@ -101,7 +105,7 @@ export default function SingleHabitPage() {
     } finally {
       setTimeout(() => {
         setProcessingReq(false)
-      }, 5000)
+      }, 10000)
     }
   }
 
