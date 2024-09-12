@@ -1,10 +1,8 @@
 .progress-tracker {
-    margin-top: 5px;
+    margin: 10;
     display: flex;
+    flex-direction: column;
     gap: 10px;
-
-
-    border: 2px solid var(--default-border-color)
 }
 .goal-width {
     width: 100%;
@@ -16,7 +14,22 @@
 }
 .goal-progress {
     background: var(--default-white);
-    width: 50%;
     height: 5px;
     border-radius: 50px;
+}
+.progress-tracker p {
+    font-style: normal;
+}
+.card.progress-tracker {
+    gap: 5px;
+}
+.card.progress-tracker .goal-width {
+    height: 10px;
+}
+.card.progress-tracker .goal-progress {
+    height: 8px;
+}
+.card.progress-tracker p {
+    font-size: small;
+    text-align: end;
 }
