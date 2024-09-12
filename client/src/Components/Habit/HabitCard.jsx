@@ -3,6 +3,7 @@ import "./HabitCard.css"
 import Timer from '../Timer/Timer'
 import {useNavigate} from "react-router-dom"
 import Progress from '../Progress/Progress'
+import {Pause} from "phosphor-react"
 
 export default function HabitCard({habit, forDisplay, color, inputName}) {
 
@@ -12,9 +13,10 @@ export default function HabitCard({habit, forDisplay, color, inputName}) {
 
   
   return (
-    <li className={`habit-card ${forDisplay ? color : habit.color}`}
+    <li className={`habit-card ${forDisplay ? color : habit.color} ${habit.status === "paused" && "paused"}`}
       onClick={forDisplay ? null : () => navigate(`/habit/${habit.id}`)}
     >
+        {habit.status === "paused" && <div className="paused-screen"><Pause size="3em" weight="fill"/></div>}
         <h3>{forDisplay ? inputName : habit.name}</h3>
         <p>Started on {date}</p>
         {forDisplay ? 
@@ -29,7 +31,7 @@ export default function HabitCard({habit, forDisplay, color, inputName}) {
               pauseDuration={habit.pauseDuration}
               pauseDate={habit.pauseDate}
             />
-            {habit.currentGoal && <Progress goal={habit.currentGoal} type={"card"}/>}
+            {habit.currentGoal && <Progress goal={habit.currentGoal} type={"card"} habit={habit}/>}
           </>
         }
 
