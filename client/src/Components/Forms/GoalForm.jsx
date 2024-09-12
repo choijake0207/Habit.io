@@ -6,18 +6,24 @@ export default function GoalForm({onClose, status, createGoal}) {
     const [goalDate, setGoalDate] = useState("")
     const [durationUnit, setDurationUnit] = useState("Days")
     const [goalDuration, setGoalDuration] = useState(0)
+    const [countStreak, setCountStreak] = useState(false)
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        let goal = {}
-        if (goalOption === "date") {
-            goal = {type: "date", value: goalDate}
-        } else  {
-            goal = {type: "duration", value: {length: goalDuration, unit: durationUnit }}
-        }
-        createGoal(goal)
-        onClose()
-    }
+        e.preventDefault();
+      
+        setTimeout(() => {
+          let goal = {};
+          if (goalOption === "date") {
+            goal = { type: "date", value: goalDate, countStreak: countStreak };
+          } else {
+            goal = { type: "duration", value: { length: goalDuration, unit: durationUnit }, countStreak: countStreak };
+          }
+          createGoal(goal);
+          onClose();
+        }, 500); // 500ms delay to prevent quick submissions
+      };
+    console.log(countStreak)
+    
   return (
     <div className="form-overlay">
         <form className={status ? "pop-up goal-form": "goal-form"} onSubmit={handleSubmit}> 
@@ -63,12 +69,15 @@ export default function GoalForm({onClose, status, createGoal}) {
             }
             <div className="optional-input">
                 <label>Count Existing Streak Time:</label>
-                <div className="custom-checkbox">
+                <label className="custom-checkbox">
                     <input
                         type="checkbox"
+                        checked={countStreak}
+                        onChange={() => setCountStreak(!countStreak)}
                     />
-                    <label></label>
-                </div> 
+                    <span className="checkmark"></span>
+                </label>
+     
             </div>
             <button type="submit" className="submit-btn">Create</button>
             <button type="button" className="cancel-btn" onClick={onClose}>Cancel</button>
