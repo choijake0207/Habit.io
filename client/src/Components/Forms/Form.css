@@ -30,7 +30,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.533);
+    background: rgba(0, 0, 0, 0.232);
     top: 0;
     left: 0;
     z-index: 9000;
@@ -89,9 +89,8 @@
     background: var(--default-background);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px;
+    padding: 40px;
+
     gap: 15px;
     border-radius: 15px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.563);
@@ -99,16 +98,137 @@
 }
 .goal-form h1{
     color: white;
+
+}
+.goal-form label {
+    color: var(--default-inactive);
+}
+.goal-option-bar {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+}
+.option-bar-btn {
+    display: flex;
+    gap: 10px;
+
 }
 .goal-option-bar button {
     background: var(--default-background);
-    border: 2px solid var(--default-border-color);
+    border: 1px solid var(--default-inactive);
+    color: var(--default-inactive);
+    border-radius: 5px;
+    width: 80px;
+    padding: 5px;
+}
+.goal-option-bar .active {
+    color: vaR(--default-white);
+    border: 1px solid var(--default-white);
+    background: rgba(255, 255, 255, 0.091);
+}
+.goal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+}
+.goal input {
+    background: var(--foreground);
+    color: var(--default-inactive);
+    border: 1px solid var(--default-inactive)
+}
+.duration-container {
+    display: flex;
+    gap: 10px;
+}
+.duration-container > * {
+    width: 75px;
+    padding: 5px;
+    cursor:pointer
+}
+.duration-container select {
+    background: none;
+    border-radius: 5px;
+    color: var(--default-inactive);
+    outline: none;
+}
+.optional-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
+.custom-checkbox {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    height: 1em;
+    width: 1em;
+    border: 1px solid var(--default-inactive);
+    border-radius: 5px;
+}
+input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    height: 0;
+    width: 0;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1em;
+    width: 1em;
+    
+}
+input[type="checkbox"]:checked ~ .checkmark {
+    left: 4px;
+    top: -5px;
+    width: 7px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+ 
+
+
+/* global style */
+form h1 {
+    color: white;
+    text-align: center;
+}
+
+.submit-btn {
+    background: var(--default-blue);
+    border-radius: 5px;
+    color: var(--default-white);
+}
+.cancel-btn {
+    background: none;
+    border: 1px solid var(--default-inactive);
+    color: var(--default-inactive);
+    border-radius: 5px;
+}
+.submit-btn:hover {
+    filter: brightness(120%)
+}
+.cancel-btn:hover {
+    border: 1px solid var(--default-white);
+    color: var(--default-white);
+}
+
+.goal-form, .habit-form {
+    gap: 20px;
+}
 
 .pop-up {
-    animation: pop-up .1s ease-in-out forwards
+    animation: pop-up .3s ease-in-out forwards
 }
+
 
 @keyframes pop-up {
     0% {
