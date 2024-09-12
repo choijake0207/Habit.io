@@ -171,6 +171,7 @@ router.post("/goal/:id", validateToken, async (req, res) => {
         const newGoal = {
             type: goal.type,
             target: goal.value,
+            countStreak: goal.countStreak,
             start: startDate,
             completed: false
         }
