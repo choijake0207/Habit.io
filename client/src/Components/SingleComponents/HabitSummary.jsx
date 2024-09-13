@@ -6,7 +6,7 @@ import Progress from '../Progress/Progress'
 
 
 
-export default function HabitSummary({habit, handleDelete}) {
+export default function HabitSummary({habit, handleDelete, handleGoalComplete}) {
   const [sTime, sDate] = habit.startDate.split("-")
   const [timeSetting, setTimeSetting] = useState("Hours")
   const timeSettings = ["Hours", "Days", "Weeks", "Months", "Years"]
@@ -47,8 +47,9 @@ export default function HabitSummary({habit, handleDelete}) {
             pauseDuration={habit.pauseDuration}
             pauseDate={habit.pauseDate}
         />
+        {habit.currentGoal && <Progress goal={habit.currentGoal} habit={habit} handleGoalComplete={handleGoalComplete}/>}
         <p>Streak started on {sDate}</p>
-        {habit.currentGoal && <Progress goal={habit.currentGoal}/>}
+        
     </section>
   )
 }
