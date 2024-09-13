@@ -5,7 +5,7 @@ import "./Progress.css"
 
 export default function Progress({goal, type, habit, handleGoalComplete}) {
  
-
+  const [completed, setCompleted] = useState(false)
   const convertHabitToISO = (habitStart) => {
     const [time, date] = habitStart.split("-")
     const [month, day, year] = date.split("/")
@@ -30,6 +30,7 @@ export default function Progress({goal, type, habit, handleGoalComplete}) {
     } else if (goal.type === "duration") {
       const {length, unit} = goal.target
       const unitToms = {
+        Minutes: 1000 * 60,
         Hours: 1000 * 60 * 60,
         Days: 1000 * 60 * 60 * 24,
         Weeks: 1000 * 60 * 60 * 24 * 7,
@@ -50,7 +51,8 @@ export default function Progress({goal, type, habit, handleGoalComplete}) {
       const {passedDuration, totalDuration, percentage} = calculateProgress()
       setProgress({passedDuration, totalDuration, percentage})
       if (passedDuration >= totalDuration) {
-        handleGoalComplete()
+        type !== "card" && handleGoalComplete()
+        setCompleted(true)
       }
     }, 1000)
     return (() => clearInterval(interval))
@@ -63,7 +65,7 @@ export default function Progress({goal, type, habit, handleGoalComplete}) {
       <div className="goal-width">
         <div className="goal-progress" style={{width: `${percentage}%`}}></div>
       </div>
-      <p>Progress: {roundedProgress}%</p>
+      {completed ? <p>Goal Completed</p> : <p>Progress: {roundedProgress}%</p>}
     </div>
   )
 }
