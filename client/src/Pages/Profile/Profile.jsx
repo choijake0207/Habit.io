@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import PrivatePageWrap from '../../Layouts/PrivatePageWrap'
 import "./profile.css"
 import { fetchProfile } from '../../API/UserAPI'
+import {AuthContext} from "../../Context/AuthContext"
 
 export default function Profile() {
   const [profile, setProfile] = useState(null)
@@ -27,25 +28,48 @@ export default function Profile() {
     <PrivatePageWrap type={"Profile"}>
       {!loading &&
         <div className="page" id="profile-page">
-          <h2>Your Information</h2>
+          
           {profile && 
             <section className="profile-info">
-              <div className="info-name">
-                <label>First Name</label>
-                <p>{profile.firstName}</p>
-                <label>Last Name</label>
-                <p>{profile.lastName}</p>
+              <header className="info-header">
+                <h2>Your Information</h2>
+              </header>
+        
+              <div className="info-detail">
+                <div className="info-firstName">
+                  <label>First Name:</label>
+                  <input
+                    type="text"
+                    value={profile.firstName}
+                    disabled
+                  />
+                </div>
+                <div className="info-lastName">
+                  <label>Last Name:</label>
+                  <input
+                    type="text"
+                    value={profile.lastName}
+                    disabled
+                  />
+                </div>
+                <div className="info-email">
+                  <label>Email:</label>
+                  <input
+                    type="text"
+                    value={profile.email}
+                    disabled
+                  />
+                </div>
+                <div className="info-password">
+                  <label>Password:</label>
+                  <button>Change Password</button>
+                </div>
               </div>
-              <label>Email</label>
-              <p>{profile.email}</p>
-              <label>Password</label>
-              <p></p>
-              <label>User Since</label>
-              <p>{profile.createdAt}</p>
             </section>
           }
-          <h2>Settings</h2>
+       
           <section className="profile-settings">
+            <h2>Settings</h2>
             Settings
           </section>
         </div>
