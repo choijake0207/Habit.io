@@ -23,8 +23,7 @@ export default function Progress({goal, type, habit}) {
     if (goal.type === "date") {
       const targetDate = new Date(goal.target)
       const totalDuration = targetDate - new Date(start)
-      const passedDuration = now - new Date(start)
-      console.log(passedDuration)
+      const passedDuration = now - new Date(start) - habit.pauseDuration
       percentage = (passedDuration / totalDuration ) * 100
     } else if (goal.type === "duration") {
       const {length, unit} = goal.target
@@ -36,9 +35,7 @@ export default function Progress({goal, type, habit}) {
         Years: 1000 * 60 * 60 * 24 * 365,
       }
       const totalDuration = length * unitToms[unit]
-      console.log(totalDuration)
-      const passedDuration = now - new Date(start)
-      console.log(passedDuration)
+      const passedDuration = now - new Date(start) - habit.pauseDuration
       percentage = (passedDuration / totalDuration) * 100
     }
     return Math.min(100, percentage); 
@@ -46,11 +43,12 @@ export default function Progress({goal, type, habit}) {
 
   const [progress, setProgress] = useState(() => calculateProgress())
   useEffect(() => {
+    if (habit.status === "paused") {return}
     const interval = setInterval(() => {
       setProgress(calculateProgress())
     }, 1000)
     return (() => clearInterval(interval))
-  }, [habit.startDate, goal])
+  }, [habit.startDate, goal, habit.pauseDuration, habit.status])
 
 
   const roundedProgress = Math.round(progress)
