@@ -28,8 +28,8 @@ export default function Timer({start, type, status, pauseDuration, pauseDate}) {
     }, [start,status, pauseDuration])
     const seconds = Math.floor((lapse / 1000) % 60)
     const minutes = Math.floor((lapse / 1000 / 60) % 60);
-    const hours = Math.floor((lapse / (1000 * 60 * 60)) % 24);
-    const days = Math.floor((lapse / (1000 * 60 * 60 * 24)) % 7);
+    const hours = Math.floor((lapse / (1000 * 60 * 60)));
+    const days = Math.floor((lapse / (1000 * 60 * 60 * 24)));
     const weeks = Math.floor(lapse / (1000 * 60 * 60 * 24 * 7));
     const months = Math.floor(lapse / (1000 * 60 * 60 * 24 * 30))
     const years = Math.floor(lapse / (1000 * 60 * 60 * 24 * 365))
