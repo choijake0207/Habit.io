@@ -1,13 +1,13 @@
 import React from 'react'
 import { ChartBar } from 'phosphor-react'
 
-export default function HabitStats({habit}) {
+export default function HabitStats({streaks, creationDate}) {
     const findLongestStreak = (streaks) => {
         if (streaks.length === 0) return 0
         const longestStreak = Math.max(...streaks.map(streak => streak.duration))
         return longestStreak
     }
-    const longestStreak = findLongestStreak(habit.streaks)
+    const longestStreak = findLongestStreak(streaks)
 
     const findAverageStreak = (streaks) => {
         if (streaks.length < 2) return 0
@@ -15,7 +15,7 @@ export default function HabitStats({habit}) {
         const averageDuration = totalDuration / streaks.length
         return averageDuration
     }
-    const averageStreak = findAverageStreak(habit.streaks)
+    const averageStreak = findAverageStreak(streaks)
     const streakFormatter = (duration) => {
         const minutes = Math.floor((duration/1000/60) % 60)
         const hours = Math.floor((duration/(1000*60*60)) % 24)
@@ -30,7 +30,7 @@ export default function HabitStats({habit}) {
         const lapse = now - creation
         return lapse
     }
-    const sinceCreation = findSinceCreation(habit.creationDate)
+    const sinceCreation = findSinceCreation(creationDate)
 
 
 
@@ -43,7 +43,7 @@ export default function HabitStats({habit}) {
         </header>
         <div className="stats-container">
         <div className="resets">
-            <p>{habit.streaks.length}</p>
+            <p>{streaks.length}</p>
             <label>Resets</label>
         </div>
         <div className="total-lapse">
