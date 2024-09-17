@@ -18,7 +18,7 @@ export default function SingleHabitPage() {
   const [alert, setAlert] = useState(null)
   const navigate = useNavigate()
   const [formVisibility, setFormVisibility] = useState(false)
-  const [processingReq, setProcessingReq] = useState(true)
+  const [processingReq, setProcessingReq] = useState(null)
 
   const showAlert = (message, type, action) => {
     setAlert({message, type, action})
@@ -112,6 +112,16 @@ export default function SingleHabitPage() {
       }, 10000)
     }
   }
+  const handleGoalComplete = async () => {
+    try {
+      const response = await updateGoalAPI(id, "complete")
+      console.log(response.data.habit)
+      setHabit(response.data.habit)
+      showAlert("Goal Completed", "success")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   return (
@@ -119,8 +129,8 @@ export default function SingleHabitPage() {
       {alert && <Alert message={alert.message} type={alert.type} action={alert.action} onClose={() => setAlert(null)}/>}
       {formVisibility && <GoalForm onClose={()=> setFormVisibility(false)} status={formVisibility}  createGoal={handleCreateGoal}/>}
       {!loading && <div className="page" id="single-habit-page">
-        <HabitSummary habit={habit} handleDelete={handleDelete}/>
-        <HabitButtons habit={habit} onReset={resetHabit} onPause={pauseHabit} toggleFormVisibility={() => setFormVisibility(true)} onCancel={cancelGoal}/>
+        <HabitSummary habit={habit} handleDelete={handleDelete} handleGoalComplete={handleGoalComplete}/>
+        <HabitButtons status={habit.status} currentGoal={habit.currentGoal} onReset={resetHabit} onPause={pauseHabit} toggleFormVisibility={() => setFormVisibility(true)} onCancel={cancelGoal}/>
         <HabitStats habit={habit}/>
       
       </div>}
