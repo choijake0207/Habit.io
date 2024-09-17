@@ -29,7 +29,9 @@ export default function Timer({start, type, status, pauseDuration, pauseDate}) {
     const seconds = Math.floor((lapse / 1000) % 60)
     const minutes = Math.floor((lapse / 1000 / 60) % 60);
     const hours = Math.floor((lapse / (1000 * 60 * 60)));
+    const moduloHours = Math.floor((lapse / (1000 * 60 * 60)) % 24);
     const days = Math.floor((lapse / (1000 * 60 * 60 * 24)));
+    const moduloDays = Math.floor((lapse / (1000 * 60 * 60 * 24)) % 7);
     const weeks = Math.floor(lapse / (1000 * 60 * 60 * 24 * 7));
     const months = Math.floor(lapse / (1000 * 60 * 60 * 24 * 30))
     const years = Math.floor(lapse / (1000 * 60 * 60 * 24 * 365))
@@ -42,9 +44,9 @@ export default function Timer({start, type, status, pauseDuration, pauseDate}) {
                 case "Hours":
                     return <h4>{hours} Hours {minutes} Minutes {seconds} Seconds</h4>
                 case "Days":
-                    return <h4>{days} Days {hours} Hours {minutes} Minutes</h4>
+                    return <h4>{days} Days {moduloHours} Hours {minutes} Minutes</h4>
                 case "Weeks":
-                    return <h4> {weeks} Weeks {days} Days {hours} Hours </h4>
+                    return <h4> {weeks} Weeks {moduloDays} Days {hours} Hours </h4>
                 case "Months":
                     return <h4>{months} Months {weeks} Weeks {days} Days  </h4>
                 case "Years":
