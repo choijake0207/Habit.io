@@ -131,7 +131,7 @@ export default function SingleHabitPage() {
       {!loading && <div className="page" id="single-habit-page">
         <HabitSummary habit={habit} handleDelete={handleDelete} handleGoalComplete={handleGoalComplete}/>
         <HabitButtons status={habit.status} currentGoal={habit.currentGoal} onReset={resetHabit} onPause={pauseHabit} toggleFormVisibility={() => setFormVisibility(true)} onCancel={cancelGoal}/>
-        <HabitStats habit={habit}/>
+        <HabitStats streaks={habit.streaks} creationDate={habit.creationDate}/>
       
       </div>}
     </PrivatePageWrap>
